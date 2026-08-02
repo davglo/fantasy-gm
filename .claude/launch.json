@@ -1,0 +1,6 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    { "name": "dash", "runtimeExecutable": "python3", "runtimeArgs": ["-m", "http.server", "8761", "--directory", "output"], "port": 8761, "autoPort": false }
+  ]
+}

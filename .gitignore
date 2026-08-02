@@ -1,0 +1,19 @@
+# OS
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Local Claude config (personal, machine-specific)
+.claude/settings.local.json
+
+# Regenerable caches (fetched fresh by build.py)
+state/players_nfl.json
+state/rankings_cache.json
+state/fc_values.json
+state/*.log
+
+# Generated output (rebuilt from `python3 build.py`)
+output/

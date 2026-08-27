@@ -1,10 +1,17 @@
 # Fantasy GM — Sleeper Dynasty Consultant
 
+**📊 Live dashboard: https://davglo.github.io/fantasy-gm/**
+
 A self-contained dashboard + CLI that acts as a co-owner for a 12-team superflex
 dynasty league. It pulls live Sleeper rosters and FantasyCalc/KTC values, runs
 roster / opponent / trade / draft analysis, and renders a single dark-themed
 `output/dashboard.html` (6 tabs: Overview, Roster, Trade Finder, Picks/War Room,
 Free Agents, Standings).
+
+The dashboard is published to GitHub Pages at the link above — open it on your
+phone or any browser, no login or setup required. It rebuilds automatically on
+every push to `main` and daily at ~9am ET with fresh Sleeper/FantasyCalc data
+(see [`.github/workflows/pages.yml`](.github/workflows/pages.yml)).
 
 ## Run it
 

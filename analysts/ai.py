@@ -67,15 +67,18 @@ def _slim(p: EnrichedPlayer) -> dict:
 def run_ai_analysis(my_enriched, metrics, opponent_profiles, sell_candidates, buys,
                     pick_portfolio, war_room, fa_list, opponent_enriched, dry_run: bool):
     """Run (or load from cache) all AI sections. Returns dict of section -> result."""
-    roster_hash = _hash(sorted(p.player_id for p in my_enriched))
+    # Hash league-wide OWNERSHIP (owner_id, player_id pairs) so any trade or waiver
+    # move — including one between two other teams — trips the staleness banner.
+    _all = list(my_enriched) + [p for plist in opponent_enriched.values() for p in plist]
+    roster_hash = _hash(sorted((p.owner_id or "", p.player_id) for p in _all))
     manual_file = STATE_DIR / "ai_manual.json"
     if manual_file.exists():
         log.info("Loading manual AI analysis from %s", manual_file)
         result = json.loads(manual_file.read_text())
         stored = result.get("_roster_hash")
         if stored and stored != roster_hash:
-            log.warning("Manual AI analysis is STALE — roster changed since it was written "
-                        "(stored=%s, current=%s)", stored, roster_hash)
+            log.warning("Manual AI analysis is STALE — a league roster changed since it was "
+                        "written (stored=%s, current=%s)", stored, roster_hash)
             result["_stale"] = True
         return result
     cache = _load_cache()

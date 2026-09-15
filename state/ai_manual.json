@@ -33,7 +33,7 @@
       },
       {
         "label": "No elite young RB",
-        "detail": "RJ Harvey (25) is the youngest RB with upside — but the backfield has no Rising-window back under 24. Tonight's 1.09 pick is critical here."
+        "detail": "RJ Harvey (25) is the youngest proven back; rookies Claiborne (22) and Randall (21) inject youth but are unproven. No established Rising-window RB yet — an in-season buy-low is the fix."
       }
     ],
     "most_urgent_action": "TE logjam resolved — Sadiq flipped to Macho King for his 2028 1st (likely a top-5 pick; league's #11 team). New target: RB is now 9-deep with aging vets (Henry 32, Javonte, Hubbard, Kamara all Declining). That's surplus, not depth. Sell a declining vet (Javonte 3014 is your most valuable sell) into a contender for a young WR or pick before their value erodes further. Also still sitting on a QB3 (Shough) to monetize.",
@@ -134,7 +134,7 @@
   "outlook": {
     "projected_power_rank": "#7 by KTC — but don't let that discourage you. This is a Contending roster that plays above its KTC ranking due to SF QB strength.",
     "three_year_outlook": "Strong 2026-2027 contention window before the RB core ages out. 2028 depends on the rookie RBs (Claiborne, Randall) hitting, the Macho 2028 1st, and whether Bo Nix sustains.",
-    "season_narrative": "The Jabroni Beaters are a legitimately good team masquerading as a mid-table squad. Mahomes and Bo Nix alone put you in superflex elite territory. The WR room (Smith, Higgins, Watson) is deep. Loveland at TE is a top-3 asset. The weakness is real though — your RB vets are a ticking clock. The draft added Claiborne and Randall, and the Sadiq trade banked a likely-early 2028 1st; move Henry and Shough this offseason and you're a top-4 team by next season.",
+    "season_narrative": "The Jabroni Beaters open the season as a legitimate contender. Mahomes + Bo Nix is superflex-elite, the WR room (Smith, Higgins, Watson) is deep, and Loveland is a top-3 dynasty TE. The one soft spot is an aging RB room (Henry, Javonte, Hubbard, Kamara) — rookies Claiborne and Randall plus the banked 2028 1st are the long-term answer. Win now while the QB/WR core is in its prime, and convert Shough and a declining RB into help as the weeks reveal real needs.",
     "key_risks": [
       "Derrick Henry (32) regression — he's been historic but age is real",
       "Javonte Williams decline accelerates — losing both RB1s in one year is dangerous",
@@ -143,7 +143,7 @@
     ],
     "key_upside_factors": [
       "Tyler Shough emerges as a QB1 — sells for huge value",
-      "Tonight's 1.09 hits (Jadarian Price becomes a top-10 dynasty RB)",
+      "A rookie RB (Claiborne or Randall) carves out a role and stabilizes the backfield",
       "Tory Horton / Jack Bech breakout — you have two 23-year-old WRs with legit upside sitting on your bench",
       "Colston Loveland becomes the undisputed best TE in dynasty — his ceiling hasn't been priced in yet"
     ],
@@ -341,7 +341,7 @@
         }
       ],
       "what_to_avoid": "Selling for picks — you want a young starter back, not futures. And don't wait: his value is a projection that camp reports can erase.",
-      "alternative": "If no one bites by August, hold through camp — a strong preseason spikes QB3 values."
+      "alternative": "If no one bites now, hold — a Week 1-2 starting-QB injury elsewhere turns Shough into a hot commodity."
     },
     "7588": {
       "sell_reasoning": "Declining at 26 with the name value of a younger back — classic sell-before-the-cliff. Your rookie RBs (Claiborne, Randall) plus Harvey cover the depth.",
@@ -731,5 +731,5 @@
       "alternative": "Hold as trade grease."
     }
   },
-  "_roster_hash": "5c717158"
+  "_roster_hash": "bed292ff"
 }

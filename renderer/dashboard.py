@@ -96,6 +96,10 @@ def render_dashboard(data, metrics, my_enriched, opponent_profiles, sell_candida
     draft_soon = (not draft_done) and 0 <= days_to_draft <= 7
     r = data.my_roster
     league_name = data.league.get("name", "Dynasty League")
+    # Season state: labels flip from draft/preseason framing once the season is live.
+    season_live = data.league.get("status") == "in_season"
+    has_results = any(x.fpts for x in data.all_rosters)
+    week = (data.league.get("settings") or {}).get("leg") or 1
     rank_by_total = sorted(opponent_profiles + [_me_profile(metrics)], key=lambda p: -p.total_value)
     my_rank = next((i + 1 for i, p in enumerate(rank_by_total) if getattr(p, "is_me", False)), "?")
 
@@ -108,7 +112,8 @@ def render_dashboard(data, metrics, my_enriched, opponent_profiles, sell_candida
     parts.append(f"<h1>{_esc(r.team_name)}</h1>")
     parts.append(f"<span class='sub'>{_esc(league_name)} · {_esc(r.display_name)}</span></div>")
     parts.append("<div class='pills'>")
-    parts.append(f"<span class='pill'>Record <b>{r.wins}-{r.losses}</b> <span class='muted'>(preseason)</span></span>")
+    _rec_note = f"Week {week}" if season_live else "preseason"
+    parts.append(f"<span class='pill'>Record <b>{r.wins}-{r.losses}</b> <span class='muted'>({_rec_note})</span></span>")
     parts.append(f"<span class='pill'>Roster Value (FC) <b>{metrics['total_value']:,}</b></span>")
     parts.append(f"<span class='pill'>Power Rank <b>#{my_rank}/12</b></span>")
     parts.append(f"<span class='pill'>Picks <b>{len(pick_portfolio)}</b> (~{pick_total:,} est.)</span>")
@@ -140,7 +145,7 @@ def render_dashboard(data, metrics, my_enriched, opponent_profiles, sell_candida
     else:
         parts.append(_tab_warroom(ai, war_room, pick_portfolio, pick_total, days_to_draft, draft_soon))
     parts.append(_tab_fa(ai, fa_analysis))
-    parts.append(_tab_standings(ai, opponent_profiles, metrics, my_rank))
+    parts.append(_tab_standings(ai, opponent_profiles, metrics, my_rank, r, has_results, week))
 
     tf_json = json.dumps(ai.get("trade_finder", {}))
     parts.append("<script>")
@@ -159,6 +164,18 @@ class _me_profile:
     is_me = True
     def __init__(self, metrics):
         self.total_value = metrics["total_value"]
+
+
+class _me_row:
+    """My team as a standings row (record + value), sortable alongside opponents."""
+    is_me = True
+    team_name = "You"
+    def __init__(self, metrics, roster):
+        self.total_value = metrics["total_value"]
+        self.wins = roster.wins
+        self.losses = roster.losses
+        self.ties = roster.ties
+        self.points_for = roster.fpts
 
 
 def _computed_strengths(metrics) -> list:
@@ -439,31 +456,32 @@ def _tab_fa(ai, fa_analysis) -> str:
     return "".join(p) + "</div>"
 
 
-def _tab_standings(ai, opponents, metrics, my_rank) -> str:
+def _tab_standings(ai, opponents, metrics, my_rank, my_roster, has_results, week) -> str:
     ol = ai.get("outlook", {})
     p = ['<div class="tab" id="t5">']
-    p.append('<div class="card sec"><h3>Preseason Power Rankings</h3>'
-             '<p class="muted" style="margin-bottom:10px">No games played yet. Ranked by roster value (FantasyCalc).</p>'
-             '<table><tr><th>#</th><th>Team</th><th>Roster Value (FC)</th><th>Tier</th><th>Picks</th></tr>')
-    rows = sorted(opponents, key=lambda o: -o.total_value)
-    # insert me
-    me_total = metrics["total_value"]
-    placed = False
-    rank = 0
-    for op in rows:
-        if not placed and me_total >= op.total_value:
-            rank += 1
-            p.append(f'<tr class="me"><td>{rank}</td><td><b>You</b></td><td>{me_total:,}</td>'
-                     f'<td><span class="badge b-grn">{metrics["dynasty_window"]}</span></td><td>—</td></tr>')
-            placed = True
-        rank += 1
-        cls = "b-red" if op.dynasty_tier == "Win-Now" else "b-grn" if op.dynasty_tier == "Rebuilding" else "b-mut"
-        p.append(f'<tr><td>{rank}</td><td>{_esc(op.team_name)}</td><td>{op.total_value:,}</td>'
-                 f'<td><span class="badge {cls}">{op.dynasty_tier}</span></td><td>{op.future_pick_count}</td></tr>')
-    if not placed:
-        rank += 1
-        p.append(f'<tr class="me"><td>{rank}</td><td><b>You</b></td><td>{me_total:,}</td>'
-                 f'<td><span class="badge b-grn">{metrics["dynasty_window"]}</span></td><td>—</td></tr>')
+    if has_results:
+        title = "Standings"
+        note = f"Through Week {week}. Ranked by record, then points for."
+    else:
+        title = "Power Rankings"
+        note = "Season just underway — no results yet. Ranked by roster value (FantasyCalc)."
+    p.append(f'<div class="card sec"><h3>{title}</h3>'
+             f'<p class="muted" style="margin-bottom:10px">{note}</p>'
+             '<table><tr><th>#</th><th>Team</th><th>Record</th><th>PF</th>'
+             '<th>Roster Value (FC)</th><th>Tier</th></tr>')
+    # In-season: rank by (wins, points for). Early: by roster value.
+    key = (lambda o: (-o.wins, -o.points_for)) if has_results else (lambda o: -o.total_value)
+    me = _me_row(metrics, my_roster)
+    rows = sorted(list(opponents) + [me], key=key)
+    for i, o in enumerate(rows, 1):
+        is_me = getattr(o, "is_me", False)
+        tier = getattr(o, "dynasty_tier", metrics["dynasty_window"])
+        cls = "b-grn" if is_me else ("b-red" if tier == "Win-Now" else "b-grn" if tier == "Rebuilding" else "b-mut")
+        name = "<b>You</b>" if is_me else _esc(o.team_name)
+        rec = f"{o.wins}-{o.losses}" + (f"-{o.ties}" if getattr(o, "ties", 0) else "")
+        p.append(f'<tr class="{"me" if is_me else ""}"><td>{i}</td><td>{name}</td>'
+                 f'<td>{rec}</td><td>{o.points_for:.1f}</td><td>{o.total_value:,}</td>'
+                 f'<td><span class="badge {cls}">{tier}</span></td></tr>')
     p.append("</table></div>")
 
     if ol:

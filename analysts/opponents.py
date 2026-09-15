@@ -1,8 +1,8 @@
 """Opponent intelligence.
 
-Season is pre_draft (every team 0-0, 0 fpts, no matchups), so there is NO
-performance axis. We classify the 12 teams purely on roster strength (KTC),
-roster age, and future pick capital.
+Classify the 12 teams on roster strength (FantasyCalc value), roster age, and
+future pick capital. Real W-L records and points-for are carried through for the
+in-season standings view once games are scored.
 """
 from __future__ import annotations
 
@@ -26,6 +26,11 @@ class OpponentProfile:
     roster_percentile: int          # 0-100 vs all 12 teams
     avg_age: float
     future_pick_count: int
+
+    wins: int = 0
+    losses: int = 0
+    ties: int = 0
+    points_for: float = 0.0
 
     surplus_positions: list[str] = field(default_factory=list)
     weak_positions: list[str] = field(default_factory=list)
@@ -83,11 +88,12 @@ def classify_opponents(data: SleeperData,
             owner_id=r.owner_id, roster_id=r.roster_id, team_name=r.team_name,
             display_name=r.display_name, total_value=total, roster_percentile=pct,
             avg_age=avg_age, future_pick_count=pick_count,
+            wins=r.wins, losses=r.losses, ties=r.ties, points_for=r.fpts,
             surplus_positions=surplus, weak_positions=weak,
             dynasty_tier=tier, trade_motivation=motiv, top_tradeable_players=tradeable,
         ))
     profiles.sort(key=lambda p: -p.total_value)
-    log.info("Classified %d opponents (no performance axis — pre-draft season)", len(profiles))
+    log.info("Classified %d opponents by roster value + age + pick capital", len(profiles))
     return profiles
 
 

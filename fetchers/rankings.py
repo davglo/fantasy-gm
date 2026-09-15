@@ -1,8 +1,9 @@
 """KeepTradeCut superflex dynasty rankings.
 
-KTC embeds player data in a `var playersArray = [...]` JS literal on the
-dynasty-rankings page (NOT a __NEXT_DATA__ block). We regex it out, json.load
-it, and fuzzy-match each KTC player to a Sleeper player_id.
+KTC serves player data in a `<script id="ktc-players">…JSON…</script>` element
+on the dynasty-rankings page (older pages used an inline `var playersArray = [...]`
+literal — kept as a fallback). We extract the JSON, json.load it, and fuzzy-match
+each KTC player to a Sleeper player_id.
 """
 from __future__ import annotations
 
@@ -68,10 +69,14 @@ def _fetch_html() -> str:
 def _scrape_ktc(html: str | None = None) -> list[dict]:
     log.info("Scraping KTC dynasty rankings...")
     html = html or _fetch_html()
-    m = re.search(r"var playersArray\s*=\s*(\[.*?\]);", html, re.DOTALL)
+    # Current: data lives in <script id="ktc-players">…JSON…</script>.
+    m = re.search(r'id=["\']ktc-players["\'][^>]*>(.*?)</', html, re.DOTALL)
     if not m:
-        raise ValueError("playersArray not found on KTC page (layout may have changed)")
-    arr = json.loads(m.group(1))
+        # Legacy fallback: inline `var playersArray = [...]`.
+        m = re.search(r"var playersArray\s*=\s*(\[.*?\]);", html, re.DOTALL)
+    if not m:
+        raise ValueError("KTC player data not found (layout may have changed)")
+    arr = json.loads(m.group(1).strip())
     log.info("KTC returned %d players", len(arr))
     return arr
 

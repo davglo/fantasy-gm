@@ -191,8 +191,12 @@
           "target_owner": "Rolling Ball of Knives 1X",
           "their_player": "Jahmyr Gibbs",
           "why_they_trade": "Only the value leader could approach fair — and you still say no",
-          "i_give": "['Patrick Mahomes']",
-          "i_receive": "['Jahmyr Gibbs']",
+          "i_give": [
+            "Patrick Mahomes"
+          ],
+          "i_receive": [
+            "Jahmyr Gibbs"
+          ],
           "ktc_balance": 4124,
           "verdict": "Don't",
           "confidence": "Low"
@@ -209,8 +213,14 @@
           "target_owner": "Bijan Mustard",
           "their_player": "Bijan Robinson",
           "why_they_trade": "0-4 and QB-desperate — Nix is the young franchise arm that pries Bijan loose",
-          "i_give": "['Bo Nix','Javonte Williams','RJ Harvey']",
-          "i_receive": "['Bijan Robinson']",
+          "i_give": [
+            "Bo Nix",
+            "Javonte Williams",
+            "RJ Harvey"
+          ],
+          "i_receive": [
+            "Bijan Robinson"
+          ],
           "ktc_balance": -131,
           "verdict": "Only for Bijan",
           "confidence": "Medium"
@@ -227,8 +237,13 @@
           "target_owner": "Bijan Mustard",
           "their_player": "Breece Hall",
           "why_they_trade": "Weak at QB, has 3 RBs — Shough fills their hole, Hall fixes yours",
-          "i_give": "['Tyler Shough','RJ Harvey']",
-          "i_receive": "['Breece Hall']",
+          "i_give": [
+            "Tyler Shough",
+            "RJ Harvey"
+          ],
+          "i_receive": [
+            "Breece Hall"
+          ],
           "ktc_balance": 1436,
           "verdict": "Do it",
           "confidence": "High"
@@ -238,8 +253,12 @@
           "target_owner": "Lemon Party",
           "their_player": "Luther Burden",
           "why_they_trade": "0-4, tanking, weak QB — a young WR if they won't move Love",
-          "i_give": "['Tyler Shough']",
-          "i_receive": "['Luther Burden']",
+          "i_give": [
+            "Tyler Shough"
+          ],
+          "i_receive": [
+            "Luther Burden"
+          ],
           "ktc_balance": -1036,
           "verdict": "Fair",
           "confidence": "Medium"
@@ -256,8 +275,13 @@
           "target_owner": "Pitts-and-Swallows",
           "their_player": "Drake London",
           "why_they_trade": "Win-now, buying — an aging RB for a title push, they have WR surplus",
-          "i_give": "['Derrick Henry','Kayshon Boutte']",
-          "i_receive": "['Drake London']",
+          "i_give": [
+            "Derrick Henry",
+            "Kayshon Boutte"
+          ],
+          "i_receive": [
+            "Drake London"
+          ],
           "ktc_balance": 348,
           "verdict": "Ask",
           "confidence": "Medium"
@@ -267,8 +291,12 @@
           "target_owner": "Threat Level Midnight",
           "their_player": "James Cook",
           "why_they_trade": "Win-now, buying; you'd swap for a younger RB",
-          "i_give": "['Derrick Henry']",
-          "i_receive": "['James Cook']",
+          "i_give": [
+            "Derrick Henry"
+          ],
+          "i_receive": [
+            "James Cook"
+          ],
           "ktc_balance": 1728,
           "verdict": "Ask (overpay to you)",
           "confidence": "Low"
@@ -285,8 +313,12 @@
           "target_owner": "Un-Kirk-comcised Penix",
           "their_player": "Jordyn Tyson",
           "why_they_trade": "0-4, weak at RB, WR surplus — a young WR for a startable RB",
-          "i_give": "['Javonte Williams']",
-          "i_receive": "['Jordyn Tyson']",
+          "i_give": [
+            "Javonte Williams"
+          ],
+          "i_receive": [
+            "Jordyn Tyson"
+          ],
           "ktc_balance": -321,
           "verdict": "Do it",
           "confidence": "Medium"
@@ -296,8 +328,12 @@
           "target_owner": "Quarterback Factory",
           "their_player": "Cam Ward",
           "why_they_trade": "Weak at RB, QB surplus — but you don't need QB; ask a pick",
-          "i_give": "['Javonte Williams']",
-          "i_receive": "['2027 3rd']",
+          "i_give": [
+            "Javonte Williams"
+          ],
+          "i_receive": [
+            "2027 3rd"
+          ],
           "ktc_balance": -2143,
           "verdict": "Only for the pick",
           "confidence": "Low"
@@ -314,8 +350,13 @@
           "target_owner": "Un-Kirk-comcised Penix",
           "their_player": "Jameson Williams",
           "why_they_trade": "0-4, weak at RB; a young WR for a body",
-          "i_give": "['Chuba Hubbard','Kayshon Boutte']",
-          "i_receive": "['Jameson Williams']",
+          "i_give": [
+            "Chuba Hubbard",
+            "Kayshon Boutte"
+          ],
+          "i_receive": [
+            "Jameson Williams"
+          ],
           "ktc_balance": -475,
           "verdict": "Fair",
           "confidence": "Medium"
@@ -332,8 +373,13 @@
           "target_owner": "Bijan Mustard",
           "their_player": "Breece Hall",
           "why_they_trade": "Pairs with Shough to land Hall",
-          "i_give": "['Tyler Shough','RJ Harvey']",
-          "i_receive": "['Breece Hall']",
+          "i_give": [
+            "Tyler Shough",
+            "RJ Harvey"
+          ],
+          "i_receive": [
+            "Breece Hall"
+          ],
           "ktc_balance": 1436,
           "verdict": "Use in the Hall deal",
           "confidence": "High"
@@ -350,8 +396,12 @@
           "target_owner": "Quarterback Factory",
           "their_player": "2027 3rd",
           "why_they_trade": "Weak at RB — depth for their push",
-          "i_give": "['Alvin Kamara']",
-          "i_receive": "['2027 3rd']",
+          "i_give": [
+            "Alvin Kamara"
+          ],
+          "i_receive": [
+            "2027 3rd"
+          ],
           "ktc_balance": 23,
           "verdict": "Take it",
           "confidence": "Medium"
@@ -368,8 +418,13 @@
           "target_owner": "Lemon Party",
           "their_player": "Jeremiyah Love",
           "why_they_trade": "0-4 tank; Smith headlines a real package",
-          "i_give": "['DeVonta Smith','Tyler Shough']",
-          "i_receive": "['Jeremiyah Love']",
+          "i_give": [
+            "DeVonta Smith",
+            "Tyler Shough"
+          ],
+          "i_receive": [
+            "Jeremiyah Love"
+          ],
           "ktc_balance": -1268,
           "verdict": "Only as the big swing",
           "confidence": "Low"
@@ -386,8 +441,12 @@
           "target_owner": "Threat Level Midnight",
           "their_player": "James Cook",
           "why_they_trade": "Win-now but weak at WR — your surplus WR for their surplus RB",
-          "i_give": "['Parker Washington']",
-          "i_receive": "['James Cook']",
+          "i_give": [
+            "Parker Washington"
+          ],
+          "i_receive": [
+            "James Cook"
+          ],
           "ktc_balance": 1601,
           "verdict": "Ask — great fit",
           "confidence": "Medium"
@@ -404,8 +463,13 @@
           "target_owner": "Threat Level Midnight",
           "their_player": "De'Von Achane",
           "why_they_trade": "Win-now, weak WR — pair Watson to land a young RB",
-          "i_give": "['Christian Watson','Tyler Shough']",
-          "i_receive": "['De'Von Achane']",
+          "i_give": [
+            "Christian Watson",
+            "Tyler Shough"
+          ],
+          "i_receive": [
+            "De'Von Achane"
+          ],
           "ktc_balance": -925,
           "verdict": "Ask",
           "confidence": "Low"
@@ -415,8 +479,14 @@
           "target_owner": "Lemon Party",
           "their_player": "Jeremiyah Love",
           "why_they_trade": "Add to a Love package",
-          "i_give": "['Christian Watson','Tyler Shough','2027 2nd']",
-          "i_receive": "['Jeremiyah Love']",
+          "i_give": [
+            "Christian Watson",
+            "Tyler Shough",
+            "2027 2nd"
+          ],
+          "i_receive": [
+            "Jeremiyah Love"
+          ],
           "ktc_balance": -45,
           "verdict": "Package use",
           "confidence": "Medium"
@@ -433,8 +503,12 @@
           "target_owner": "Threat Level Midnight",
           "their_player": "James Cook",
           "why_they_trade": "Win-now, weak at WR — a clean WR-for-RB swap",
-          "i_give": "['Tee Higgins']",
-          "i_receive": "['James Cook']",
+          "i_give": [
+            "Tee Higgins"
+          ],
+          "i_receive": [
+            "James Cook"
+          ],
           "ktc_balance": 2196,
           "verdict": "Ask (overpay to you)",
           "confidence": "Low"
@@ -457,8 +531,12 @@
           "target_owner": "Any team",
           "their_player": "package balancer",
           "why_they_trade": "Closes value gaps in the Henry/Hubbard deals above",
-          "i_give": "['Kayshon Boutte']",
-          "i_receive": "['(see packages)']",
+          "i_give": [
+            "Kayshon Boutte"
+          ],
+          "i_receive": [
+            "(see packages)"
+          ],
           "ktc_balance": 0,
           "verdict": "Use in packages",
           "confidence": "High"
@@ -487,8 +565,12 @@
           "target_owner": "Rolling Ball of Knives 1X",
           "their_player": "Trey McBride",
           "why_they_trade": "Only an elite-TE-for-TE talk even starts",
-          "i_give": "['Colston Loveland']",
-          "i_receive": "['Trey McBride']",
+          "i_give": [
+            "Colston Loveland"
+          ],
+          "i_receive": [
+            "Trey McBride"
+          ],
           "ktc_balance": 3005,
           "verdict": "Don't — reference only",
           "confidence": "Low"
@@ -505,8 +587,13 @@
           "target_owner": "You Hate Us Cuz You Anus",
           "their_player": "Kyren Williams",
           "why_they_trade": "Weak at TE; pair with a WR to land their RB",
-          "i_give": "['T.J. Hockenson','Tee Higgins']",
-          "i_receive": "['Kyren Williams']",
+          "i_give": [
+            "T.J. Hockenson",
+            "Tee Higgins"
+          ],
+          "i_receive": [
+            "Kyren Williams"
+          ],
           "ktc_balance": 762,
           "verdict": "Ask",
           "confidence": "Medium"
@@ -516,8 +603,13 @@
           "target_owner": "Phil’s Dong Dusters",
           "their_player": "D'Andre Swift",
           "why_they_trade": "Weak at TE, selling — Hockenson + piece for an RB",
-          "i_give": "['T.J. Hockenson','Christian Watson']",
-          "i_receive": "['D'Andre Swift']",
+          "i_give": [
+            "T.J. Hockenson",
+            "Christian Watson"
+          ],
+          "i_receive": [
+            "D'Andre Swift"
+          ],
           "ktc_balance": -1641,
           "verdict": "Package use",
           "confidence": "Low"
@@ -534,8 +626,12 @@
           "target_owner": "Phil’s Dong Dusters",
           "their_player": "2027 3rd",
           "why_they_trade": "Weak at TE — cheap long-term fix for them",
-          "i_give": "['Gunnar Helm']",
-          "i_receive": "['2027 3rd']",
+          "i_give": [
+            "Gunnar Helm"
+          ],
+          "i_receive": [
+            "2027 3rd"
+          ],
           "ktc_balance": 232,
           "verdict": "Fair",
           "confidence": "Medium"

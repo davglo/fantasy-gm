@@ -511,7 +511,8 @@ function renderTF(){
   if(!d||Object.keys(d).length===0){out.innerHTML='<p class="muted">No pre-computed analysis (run without --dry-run).</p>';return;}
   let h='<div class="card"><h3>Sell Reasoning</h3><p>'+(d.sell_reasoning||'')+'</p></div>';
   (d.top_targets||[]).forEach(t=>{
-    const give=(t.i_give||[]).join(', '),get=(t.i_receive||[]).join(', ');
+    const L=x=>Array.isArray(x)?x.join(', '):(x||'');
+    const give=L(t.i_give),get=L(t.i_receive);
     const bal=t.ktc_balance||0, bcls=bal>0?'b-grn':bal<0?'b-red':'b-mut';
     h+='<div class="card" style="margin-top:10px"><div style="display:flex;justify-content:space-between">'
       +'<b>#'+(t.rank||'')+' '+(t.target_owner||'')+'</b>'

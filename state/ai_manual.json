@@ -117,7 +117,7 @@
       "Derrick Henry — producing starter on a 4-0 team",
       "DeVonta Smith / Parker Washington / Christian Watson / Tee Higgins — your only four quality WRs"
     ],
-    "pick_strategy": "Picks are currency for a 4-0 team — package mid- and late-rounders. Hold Bijan Mustard's 2028 1st (they're 0-4, so it's trending top-3) and your own 2027 1st."
+    "pick_strategy": "Picks are currency for a 4-0 team — package mid- and late-rounders, including Pitts-and-Swallows' 2027 2nd. Hold Bijan Mustard's 2028 1st (they're 0-4, so it's trending top-3) and your own 2027 1st."
   },
   "outlook": {
     "projected_power_rank": "Title contender — #1 by record, #2 in points, #2 in title odds.",
@@ -148,7 +148,7 @@
       },
       {
         "team": "Threat Level Midnight",
-        "why": "Contender that's weak at WR — a complementary trade partner."
+        "why": "2-2 contender, weak at WR — a rival for sellers' players, not a trade partner for your starters."
       }
     ]
   },
@@ -315,26 +315,10 @@
       "alternative": "Keep starting him."
     },
     "8167": {
-      "sell_reasoning": "Starting WR — hold. The only deal worth hearing is a complementary swap with a WR-needy team that returns a better RB.",
-      "top_targets": [
-        {
-          "rank": 1,
-          "target_owner": "Threat Level Midnight",
-          "their_player": "James Cook",
-          "why_they_trade": "Contender that's weak at WR — both teams fill a hole",
-          "i_give": [
-            "Christian Watson",
-            "Chuba Hubbard"
-          ],
-          "i_receive": [
-            "James Cook"
-          ],
-          "verdict": "Ask",
-          "confidence": "Low"
-        }
-      ],
-      "what_to_avoid": "Opening a WR hole you can't fill — your 5th WR is well behind.",
-      "alternative": "Hold."
+      "sell_reasoning": "Starting WR on a 4-0 team — hold. You have exactly four quality WRs for four slots, and the WR-for-RB swap partners (Threat Level Midnight) are contenders, not sellers.",
+      "top_targets": [],
+      "what_to_avoid": "Opening a WR hole you can't fill — your 5th WR (Malik Washington) is well behind.",
+      "alternative": "Hold; upgrade RB with Shough instead."
     },
     "6801": {
       "sell_reasoning": "Starting WR — hold for the same reason as Smith and Watson: four quality WRs for four WR slots.",
@@ -343,26 +327,10 @@
       "alternative": "Hold."
     },
     "7594": {
-      "sell_reasoning": "Starting RB — hold for the title run.",
-      "top_targets": [
-        {
-          "rank": 1,
-          "target_owner": "Threat Level Midnight",
-          "their_player": "James Cook",
-          "why_they_trade": "Pairs with Watson in a WR-for-RB swap with a WR-needy contender",
-          "i_give": [
-            "Christian Watson",
-            "Chuba Hubbard"
-          ],
-          "i_receive": [
-            "James Cook"
-          ],
-          "verdict": "Ask",
-          "confidence": "Low"
-        }
-      ],
+      "sell_reasoning": "Starting RB — hold for the title run. He's the weakest RB starter, so the fix is adding an RB above him (Love, Hall), not selling him.",
+      "top_targets": [],
       "what_to_avoid": "Selling him for futures mid-contention.",
-      "alternative": "Keep starting him."
+      "alternative": "Keep starting him until a Shough deal lands, then he becomes RB depth."
     },
     "12489": {
       "sell_reasoning": "Bench RB with real value — your best sweetener for an RB upgrade.",

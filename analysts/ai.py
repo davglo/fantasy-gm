@@ -61,16 +61,20 @@ def _slim(p: EnrichedPlayer) -> dict:
     }
 
 
+def league_roster_hash(my_enriched, opponent_enriched) -> str:
+    """Hash of league-wide OWNERSHIP (owner_id, player_id pairs): any trade or
+    waiver move — including one between two other teams — changes it."""
+    everyone = list(my_enriched) + [p for plist in opponent_enriched.values() for p in plist]
+    return _hash(sorted((p.owner_id or "", p.player_id) for p in everyone))
+
+
 # ---------------------------------------------------------------------------
 # Public entry
 # ---------------------------------------------------------------------------
 def run_ai_analysis(my_enriched, metrics, opponent_profiles, sell_candidates, buys,
                     pick_portfolio, war_room, fa_list, opponent_enriched, dry_run: bool):
     """Run (or load from cache) all AI sections. Returns dict of section -> result."""
-    # Hash league-wide OWNERSHIP (owner_id, player_id pairs) so any trade or waiver
-    # move — including one between two other teams — trips the staleness banner.
-    _all = list(my_enriched) + [p for plist in opponent_enriched.values() for p in plist]
-    roster_hash = _hash(sorted((p.owner_id or "", p.player_id) for p in _all))
+    roster_hash = league_roster_hash(my_enriched, opponent_enriched)
     manual_file = STATE_DIR / "ai_manual.json"
     if manual_file.exists():
         log.info("Loading manual AI analysis from %s", manual_file)

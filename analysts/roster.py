@@ -7,6 +7,7 @@ load the full 2000-player DB into downstream prompts).
 from __future__ import annotations
 
 import logging
+import statistics
 from dataclasses import dataclass, field
 
 from fetchers.rankings import DynastyRanking
@@ -144,8 +145,9 @@ def enrich_roster(roster: TeamRoster, players: dict[str, Player],
 # ---------------------------------------------------------------------------
 # Roster metrics (my team)
 # ---------------------------------------------------------------------------
-# Starting-lineup minimums by position (FLEX/SUPER_FLEX shared, counted via surplus).
-STARTING_SLOTS = {"QB": 2, "RB": 2, "WR": 2, "TE": 1}
+# Real weekly starters by position for this league's lineup (QB, 2 RB, 2 WR, TE,
+# 3 FLEX, SUPER_FLEX): SUPER_FLEX counted as a 2nd QB, FLEX split 1 RB / 2 WR.
+STARTING_SLOTS = {"QB": 2, "RB": 3, "WR": 4, "TE": 1}
 STARTER_VALUE = 2000   # true starter quality (FC scale), not depth
 
 
@@ -226,6 +228,41 @@ def compute_roster_metrics(enriched: list[EnrichedPlayer]) -> dict:
         "age_curve": age_curve,
         "dynasty_window": window,
     }
+
+
+def positional_needs(my_enriched: list[EnrichedPlayer],
+                     opponent_enriched: dict[str, list[EnrichedPlayer]]) -> dict[str, dict]:
+    """0-1 need score per position, measured against the rest of the league:
+    how far my starters trail the league-median starters, how thin my next man
+    up is, and how much of my starting value is aging out (dynasty risk)."""
+    def lineup(plist: list[EnrichedPlayer], pos: str):
+        players = sorted((p for p in plist if p.position == pos), key=lambda p: -p.market_value)
+        k = STARTING_SLOTS[pos]
+        starters = players[:k]
+        start_avg = sum(p.market_value for p in starters) / k
+        nxt = players[k] if len(players) > k else None
+        depth = nxt.market_value if nxt else 0
+        start_val = sum(p.market_value for p in starters) or 1
+        aging = sum(p.market_value for p in starters if p.dynasty_window == "Declining") / start_val
+        weakest = starters[-1] if len(starters) == k else None
+        return start_avg, depth, aging, weakest, nxt
+
+    needs: dict[str, dict] = {}
+    for pos in STARTING_SLOTS:
+        league = [lineup(pl, pos) for pl in opponent_enriched.values()]
+        med_start = statistics.median(x[0] for x in league) or 1
+        med_depth = statistics.median(x[1] for x in league) or 1
+        start_avg, depth, aging, weakest, nxt = lineup(my_enriched, pos)
+        start_gap = max(0.0, (med_start - start_avg) / med_start)
+        depth_gap = max(0.0, (med_depth - depth) / med_depth)
+        needs[pos] = {
+            "need": round(min(1.0, 1.4 * start_gap + 0.6 * depth_gap + 0.4 * aging), 2),
+            "start_gap": round(start_gap, 2), "depth_gap": round(depth_gap, 2),
+            "aging": round(aging, 2), "depth_value": depth,
+            "depth_player": nxt.name if nxt else None,
+            "weakest_starter": weakest.name if weakest else None,
+        }
+    return needs
 
 
 # ---------------------------------------------------------------------------

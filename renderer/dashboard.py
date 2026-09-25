@@ -67,6 +67,10 @@ def _grade_cls(g: str) -> str:
     return {"A": "b-grn", "B": "b-blue", "C": "b-gold", "D": "b-red", "F": "b-red"}.get(g, "b-mut")
 
 
+def _status_cls(status: str) -> str:
+    return {"Contender": "b-grn", "Bubble": "b-gold", "Long shot": "b-mut"}.get(status, "b-mut")
+
+
 def _tier_cls(tier: str) -> str:
     return {"Elite": "b-pur", "Starter": "b-grn", "Depth": "b-blue", "Stash": "b-gold", "Cut": "b-red"}.get(tier, "b-mut")
 
@@ -87,7 +91,7 @@ def _bsc(window: str) -> tuple[str, str]:
 # ---------------------------------------------------------------------------
 def render_dashboard(data, metrics, my_enriched, opponent_profiles, sell_candidates, buys,
                      pick_portfolio, pick_total, war_room, fa_analysis, ai, rankings,
-                     draft_recap=None) -> str:
+                     contention=None, fa_summary="") -> str:
     # Draft state comes from Sleeper, not a hardcoded date.
     draft = data.draft
     draft_done = draft.get("status") == "complete"
@@ -114,38 +118,38 @@ def render_dashboard(data, metrics, my_enriched, opponent_profiles, sell_candida
     parts.append("<div class='pills'>")
     _rec_note = f"Week {week}" if season_live else "preseason"
     parts.append(f"<span class='pill'>Record <b>{r.wins}-{r.losses}</b> <span class='muted'>({_rec_note})</span></span>")
+    contention = contention or {}
+    me = contention.get(data.user_id)
     parts.append(f"<span class='pill'>Roster Value (FC) <b>{metrics['total_value']:,}</b></span>")
-    parts.append(f"<span class='pill'>Power Rank <b>#{my_rank}/12</b></span>")
+    parts.append(f"<span class='pill'>Value Rank <b>#{my_rank}/12</b></span>")
+    if me:
+        parts.append(f"<span class='pill'>Title Odds <span class='badge {_status_cls(me.status)}'>{me.status}</span></span>")
     parts.append(f"<span class='pill'>Picks <b>{len(pick_portfolio)}</b> (~{pick_total:,} est.)</span>")
-    parts.append(f"<span class='pill'>Updated {datetime.datetime.now():%b %d %H:%M}</span>")
+    parts.append(f"<span class='pill'>Data {datetime.datetime.now():%b %d %H:%M}</span>")
+    if ai.get("_generated_at"):
+        parts.append(f"<span class='pill muted'>Analysis {_esc(ai['_generated_at'])}</span>")
     parts.append("</div>")
     if draft_soon:
         parts.append(f"<div class='banner'>⚠ Rookie Draft in {days_to_draft} day(s)</div>")
     if war_room is not None and war_room.draft_type_conflict:
         parts.append(f"<div class='banner'>⚠ Sleeper reports draft type = '{war_room.draft_type_actual}', "
                      "but you expect SNAKE. Round 2/4 slots differ — fix the league setting before the draft.</div>")
-    if ai.get("_stale"):
-        parts.append("<div class='banner'>⚠ AI analysis may be stale — the roster has changed since it was written. "
-                     "Regenerate state/ai_manual.json (or run without --dry-run).</div>")
     parts.append("</header>")
 
-    # Nav
-    tabs = ["Overview", "Roster", "Trade Finder",
-            "Picks" if draft_done else "War Room", "Free Agents", "Standings"]
+    # Nav — War Room only exists in the run-up to a draft
+    tabs = ["Overview", "Roster", "Trade Finder"] + ([] if draft_done else ["War Room"]) + ["Free Agents", "Standings"]
     parts.append("<nav>")
     for i, t in enumerate(tabs):
         parts.append(f"<button class='{'active' if i == 0 else ''}' onclick=\"showTab({i})\">{t}</button>")
     parts.append("</nav>")
 
-    parts.append(_tab_overview(ai, metrics, opponent_profiles, draft_soon))
+    parts.append(_tab_overview(ai, metrics, opponent_profiles, contention, data.user_id))
     parts.append(_tab_roster(my_enriched))
     parts.append(_tab_trades(ai, sell_candidates, buys, my_enriched))
-    if draft_done:
-        parts.append(_tab_picks_recap(draft_recap or [], pick_portfolio, pick_total))
-    else:
+    if not draft_done:
         parts.append(_tab_warroom(ai, war_room, pick_portfolio, pick_total, days_to_draft, draft_soon))
-    parts.append(_tab_fa(ai, fa_analysis))
-    parts.append(_tab_standings(ai, opponent_profiles, metrics, my_rank, r, has_results, week))
+    parts.append(_tab_fa(fa_analysis, fa_summary))
+    parts.append(_tab_standings(ai, opponent_profiles, metrics, r, has_results, week, contention, data.user_id))
 
     tf_json = json.dumps(ai.get("trade_finder", {}))
     parts.append("<script>")
@@ -200,22 +204,36 @@ def _computed_weaknesses(metrics) -> list:
 
 
 # ---------------------------------------------------------------------------
-def _tab_overview(ai, metrics, opponents, draft_soon) -> str:
+STATUS_PLAYBOOK = {
+    "Contender": "Win now: hold producing starters, even aging ones, and spend surplus + picks on upgrades.",
+    "Bubble": "Push selectively: buy only upgrades that don't cost future value; sell vets that aren't starting.",
+    "Long shot": "Build for next year: sell aging producers for youth and picks while they still have value.",
+}
+
+
+def _tab_overview(ai, metrics, opponents, contention, my_owner_id) -> str:
     g = ai.get("roster_grade", {})
+    me = contention.get(my_owner_id)
     p = ['<div class="tab active" id="t0">']
     grade = g.get("overall_grade", "—")
     p.append('<div class="grid g2"><div class="card">')
     p.append(f'<div class="bigGrade {_grade_cls(grade)}" style="color:inherit"><span class="badge {_grade_cls(grade)}" '
              f'style="font-size:48px;padding:8px 18px">{_esc(grade)}</span></div>')
-    p.append(f'<div class="headline">{_esc(g.get("headline", "Run without --dry-run to generate AI analysis."))}</div>')
-    dw = g.get("dynasty_window", metrics["dynasty_window"])
-    dwcls = "b-grn" if "ontend" in dw else "b-blue" if "uild" in dw else "b-red"
-    p.append(f'<span class="badge {dwcls}">{_esc(dw)}</span>')
+    p.append(f'<div class="headline">{_esc(g.get("headline", "Analysis not generated yet."))}</div>')
     if g.get("window_explanation"):
         p.append(f'<p class="muted" style="margin-top:8px">{_esc(g["window_explanation"])}</p>')
     p.append("</div>")
     p.append('<div class="card"><h3>Most Urgent Action</h3>')
     p.append(f'<div class="callout">{_esc(g.get("most_urgent_action", "—"))}</div></div></div>')
+
+    # This season: computed live every build, same yardstick as every other team
+    if me:
+        basis = (f"#{me.record_rank} by record · #{me.pf_rank} in points for · #{me.value_rank} in roster value"
+                 if me.games >= 3 else f"#{me.value_rank} in roster value (records count after Week 3)")
+        p.append('<div class="card sec" style="margin-top:14px"><h3>Title Odds — This Season</h3>'
+                 f'<span class="badge {_status_cls(me.status)}" style="font-size:18px;padding:4px 12px">{me.status}</span>'
+                 f' <span class="muted">#{me.rank} of 12 · {basis}</span>'
+                 f'<div class="callout" style="margin-top:10px">{STATUS_PLAYBOOK[me.status]}</div></div>')
 
     # positional grades
     pg = g.get("positional_grades", {})
@@ -244,31 +262,17 @@ def _tab_overview(ai, metrics, opponents, draft_soon) -> str:
         p.append("</div>")
     p.append("</div>")
 
-    # opponent landscape mini — include "You"
-    p.append('<div class="card sec"><h3>Opponent Landscape</h3><table><tr><th>#</th><th>Team</th><th>Tier</th><th>Motivation</th><th>Value (FC)</th></tr>')
-    me_val = metrics["total_value"]
-    me_placed = False
-    rank = 0
-    for op in sorted(opponents, key=lambda o: -o.total_value):
-        if not me_placed and me_val >= op.total_value:
-            rank += 1
-            dw = metrics["dynasty_window"]
-            dwcls2 = "b-grn" if "ontend" in dw else "b-blue" if "uild" in dw else "b-red"
-            p.append(f'<tr class="me"><td>{rank}</td><td><b>You</b></td>'
-                     f'<td><span class="badge {dwcls2}">{dw}</span></td>'
-                     f'<td class="muted">—</td><td>{me_val:,}</td></tr>')
-            me_placed = True
-        rank += 1
-        cls = "b-red" if op.dynasty_tier == "Win-Now" else "b-grn" if op.dynasty_tier == "Rebuilding" else "b-mut"
-        p.append(f'<tr><td>{rank}</td><td>{_esc(op.team_name)}</td><td><span class="badge {cls}">{op.dynasty_tier}</span></td>'
-                 f'<td class="muted">{op.trade_motivation}</td><td>{op.total_value:,}</td></tr>')
-    if not me_placed:
-        rank += 1
-        dw = metrics["dynasty_window"]
-        dwcls2 = "b-grn" if "ontend" in dw else "b-blue" if "uild" in dw else "b-red"
-        p.append(f'<tr class="me"><td>{rank}</td><td><b>You</b></td>'
-                 f'<td><span class="badge {dwcls2}">{dw}</span></td>'
-                 f'<td class="muted">—</td><td>{me_val:,}</td></tr>')
+    # league landscape — every team (you included) on the same title-odds yardstick
+    p.append('<div class="card sec"><h3>League Landscape</h3><table><tr><th>#</th><th>Team</th>'
+             '<th>Title Odds</th><th>Trade Motivation</th><th>Value (FC)</th></tr>')
+    rows = [(my_owner_id, "<b>You</b>", "—", metrics["total_value"], True)]
+    rows += [(o.owner_id, _esc(o.team_name), o.trade_motivation, o.total_value, False) for o in opponents]
+    rows.sort(key=lambda x: contention[x[0]].rank if x[0] in contention else 99)
+    for i, (oid, name, motiv, val, is_me) in enumerate(rows, 1):
+        st = contention[oid].status if oid in contention else "—"
+        p.append(f'<tr class="{"me" if is_me else ""}"><td>{i}</td><td>{name}</td>'
+                 f'<td><span class="badge {_status_cls(st)}">{st}</span></td>'
+                 f'<td class="muted">{motiv}</td><td>{val:,}</td></tr>')
     p.append("</table></div></div>")
     return "".join(p)
 
@@ -414,31 +418,14 @@ def _portfolio_grid(pick_portfolio, pick_total) -> str:
     return "".join(p)
 
 
-def _tab_picks_recap(draft_recap, pick_portfolio, pick_total) -> str:
-    """Post-draft replacement for the War Room: recap + remaining pick assets."""
-    p = ['<div class="tab" id="t3">']
-    p.append('<div class="card sec"><h3>Rookie Draft Recap — complete</h3>')
-    if draft_recap:
-        for d in draft_recap:
-            p.append('<div class="pcard"><div>'
-                     f'<div class="nm">{_esc(d["name"])} <span class="badge b-pur">{_esc(d["position"])}</span></div>'
-                     f'<div class="meta">Round {d["round"]}</div></div>'
-                     f'<div class="ktc">#{d["pick_no"]}</div></div>')
-    else:
-        p.append('<p class="muted">No selections found for your roster.</p>')
-    p.append("</div>")
-    p.append(_portfolio_grid(pick_portfolio, pick_total))
-    return "".join(p) + "</div>"
-
-
-def _tab_fa(ai, fa_analysis) -> str:
-    ft = ai.get("fa_targets", {})
+def _tab_fa(fa_analysis, fa_summary) -> str:
     p = ['<div class="tab" id="t4">']
-    if ft.get("waiver_strategy"):
-        p.append(f'<div class="card sec"><h3>Waiver Strategy</h3><p class="muted">{_esc(ft["waiver_strategy"])}</p></div>')
-    groups = [("Add Immediately", "Immediate Add", "b-grn"), ("Watchlist", "Watchlist", "b-blue"),
-              ("Deep Stash", "Deep Stash", "b-gold")]
-    for title, pri, cls in groups:
+    if fa_summary:
+        p.append(f'<div class="card sec"><h3>Waiver Strategy</h3><p>{_esc(fa_summary)}</p>'
+                 '<p class="muted" style="font-size:12px;margin-top:6px">Scored on roster need (starters and '
+                 'depth vs the league, plus aging), current value, and future upside — weighted by your title odds.</p></div>')
+    groups = [("Add Immediately", "Immediate Add"), ("Watchlist", "Watchlist"), ("Deep Stash", "Deep Stash")]
+    for title, pri in groups:
         players = [f for f in fa_analysis if f.add_priority == pri]
         if not players:
             continue
@@ -448,15 +435,16 @@ def _tab_fa(ai, fa_analysis) -> str:
             rk = ' <span class="badge b-blue">Rookie</span>' if f.player.is_rookie else ""
             p.append('<div class="pcard"><div>'
                      f'<div class="nm">{_esc(f.player.name)}{need}{rk}</div>'
-                     f'<div class="meta">{f.player.position} · {f.player.team} · age {f.player.age} · {f.player.dynasty_window}</div></div>'
+                     f'<div class="meta">{f.player.position} · {f.player.team} · age {f.player.age} · {f.player.dynasty_window}</div>'
+                     f'<div class="meta">{_esc(f.reason)}</div></div>'
                      f'<div class="ktc">{f.player.market_value:,}</div></div>')
         p.append("</div>")
     if not fa_analysis:
-        p.append('<div class="card"><p class="muted">No notable free agents (value > 350).</p></div>')
+        p.append('<div class="card"><p class="muted">No free agents would improve your roster right now.</p></div>')
     return "".join(p) + "</div>"
 
 
-def _tab_standings(ai, opponents, metrics, my_rank, my_roster, has_results, week) -> str:
+def _tab_standings(ai, opponents, metrics, my_roster, has_results, week, contention, my_owner_id) -> str:
     ol = ai.get("outlook", {})
     p = ['<div class="tab" id="t5">']
     if has_results:
@@ -468,20 +456,20 @@ def _tab_standings(ai, opponents, metrics, my_rank, my_roster, has_results, week
     p.append(f'<div class="card sec"><h3>{title}</h3>'
              f'<p class="muted" style="margin-bottom:10px">{note}</p>'
              '<table><tr><th>#</th><th>Team</th><th>Record</th><th>PF</th>'
-             '<th>Roster Value (FC)</th><th>Tier</th></tr>')
+             '<th>Roster Value (FC)</th><th>Title Odds</th></tr>')
     # In-season: rank by (wins, points for). Early: by roster value.
     key = (lambda o: (-o.wins, -o.points_for)) if has_results else (lambda o: -o.total_value)
     me = _me_row(metrics, my_roster)
     rows = sorted(list(opponents) + [me], key=key)
     for i, o in enumerate(rows, 1):
         is_me = getattr(o, "is_me", False)
-        tier = getattr(o, "dynasty_tier", metrics["dynasty_window"])
-        cls = "b-grn" if is_me else ("b-red" if tier == "Win-Now" else "b-grn" if tier == "Rebuilding" else "b-mut")
+        c = contention.get(my_owner_id if is_me else o.owner_id)
+        st = c.status if c else "—"
         name = "<b>You</b>" if is_me else _esc(o.team_name)
         rec = f"{o.wins}-{o.losses}" + (f"-{o.ties}" if getattr(o, "ties", 0) else "")
         p.append(f'<tr class="{"me" if is_me else ""}"><td>{i}</td><td>{name}</td>'
                  f'<td>{rec}</td><td>{o.points_for:.1f}</td><td>{o.total_value:,}</td>'
-                 f'<td><span class="badge {cls}">{tier}</span></td></tr>')
+                 f'<td><span class="badge {_status_cls(st)}">{st}</span></td></tr>')
     p.append("</table></div>")
 
     if ol:
@@ -513,13 +501,14 @@ function renderTF(){
   (d.top_targets||[]).forEach(t=>{
     const L=x=>Array.isArray(x)?x.join(', '):(x||'');
     const give=L(t.i_give),get=L(t.i_receive);
-    const bal=t.ktc_balance||0, bcls=bal>0?'b-grn':bal<0?'b-red':'b-mut';
+    const bal=t.ktc_balance||0, fair=t.fairness||'';
+    const bcls=fair==='You win'||fair==='Fair'?'b-grn':fair==='Slight overpay'?'b-gold':fair?'b-red':'b-mut';
     h+='<div class="card" style="margin-top:10px"><div style="display:flex;justify-content:space-between">'
       +'<b>#'+(t.rank||'')+' '+(t.target_owner||'')+'</b>'
-      +'<span class="badge '+bcls+'">'+(t.verdict||'')+' ('+(bal>0?'+':'')+bal+')</span></div>'
+      +'<span class="badge '+bcls+'">'+(fair||'est.')+' ('+(bal>0?'+':'')+bal+')</span></div>'
       +'<div class="muted" style="margin:6px 0">'+(t.why_they_trade||'')+'</div>'
       +'<div style="font-size:13px">Give: <b>'+give+'</b> &nbsp;→&nbsp; Get: <b>'+get+'</b></div>'
-      +'<div class="muted" style="font-size:12px">Confidence: '+(t.confidence||'')+'</div></div>';
+      +'<div class="muted" style="font-size:12px">'+(t.verdict?'Take: '+t.verdict+' · ':'')+'Confidence: '+(t.confidence||'')+'</div></div>';
   });
   if(d.what_to_avoid)h+='<div class="card" style="margin-top:10px"><h3>Avoid</h3><p class="muted">'+d.what_to_avoid+'</p></div>';
   if(d.alternative)h+='<div class="card" style="margin-top:10px"><h3>Hold Case</h3><p class="muted">'+d.alternative+'</p></div>';

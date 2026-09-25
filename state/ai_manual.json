@@ -1,651 +1,496 @@
 {
+  "_generated_at": "2026-09-25",
+  "_roster_hash": "eae19fb8",
   "roster_grade": {
     "overall_grade": "A-",
-    "headline": "4-0 and legit — elite QB/WR spine carrying a top record; RB is the one spot to upgrade for a title push",
-    "dynasty_window": "Contending",
-    "window_explanation": "Off to a 4-0 start (309 PF). Mahomes + a deep WR corps + Loveland at TE are winning games now. The window is wide open — this is a buy season, not a sell one.",
+    "headline": "4-0 contender — hold the vets, and spend QB3 Shough on a young RB",
+    "window_explanation": "#1 by record and #2 in points for, but only #7 by roster value — you're winning on production and a strong lineup, not depth. That's a win-now profile: protect the lineup, upgrade the one aging position.",
     "strengths": [
       {
-        "label": "Winning now (4-0)",
-        "detail": "309 points for, top of the standings. The roster is producing, not just theoretically good."
+        "label": "Winning now",
+        "detail": "4-0 with 309 points for (#2 in the league). The lineup is producing every week."
       },
       {
-        "label": "QB strength",
-        "detail": "Mahomes (6,188) is your rock; Bo Nix (4,257) and Shough (4,026) give you a genuine surplus in a 2-QB league — real trade ammunition."
+        "label": "Superflex QB",
+        "detail": "Mahomes starts; Bo Nix and Tyler Shough give you a third starting-caliber QB to trade — rare in a 2-QB league."
       },
       {
-        "label": "Deep, productive WR",
-        "detail": "Smith, Parker Washington, Watson, Higgins all starting and producing; 12 WRs total means clear surplus to deal from."
+        "label": "Four quality WRs",
+        "detail": "Smith, Parker Washington, Watson, and Higgins fill all four WR slots."
       },
       {
-        "label": "Loveland + pick capital",
-        "detail": "Elite young TE1, plus a 2028 1st from Bijan Mustard (now 0-4 — likely a premium pick) and a 2027 2nd from Pitts."
+        "label": "Loveland + a premium pick",
+        "detail": "Elite young TE1, plus Bijan Mustard's 2028 1st — they're 0-4, so it's trending toward the top of the draft."
       }
     ],
     "weaknesses": [
       {
-        "label": "RB is aging and thin",
-        "detail": "Henry (32), Javonte (26 declining), Hubbard (27 declining) are your starters. Harvey (25) and rookies Claiborne/Randall are the only youth. This is the spot to upgrade while you're winning."
+        "label": "Every starting RB is aging",
+        "detail": "Henry (32), Javonte (26), and Hubbard (27) are all past their peak. They're fine this year, but it's the one spot to reinforce."
       },
       {
-        "label": "Value vs record gap",
-        "detail": "You're 4-0 but mid-pack by roster value — you're outperforming your talent. Use the hot start to buy a difference-maker before regression."
+        "label": "Thin behind the starters",
+        "detail": "Your 5th WR (Malik Washington) and 4th RB (Harvey) are well behind — one injury exposes it."
       },
       {
-        "label": "Thin behind Loveland at TE",
-        "detail": "Hockenson and Helm are depth only; one starter is all you need, so this is fine."
+        "label": "Value lags the record",
+        "detail": "#7 by roster value. Some regression is likely unless you add talent."
       }
     ],
-    "most_urgent_action": "You're 4-0 — buy, don't sell. Convert your QB surplus (Shough, or Bo Nix for the big swing) plus a declining RB into a real running back. Bijan Mustard (0-4, weak at QB) and Lemon Party (0-4, weak QB+RB, holds Jeremiyah Love) are the motivated sellers to target.",
+    "most_urgent_action": "Turn Tyler Shough into a young RB. Three 0-4 sellers need a QB. Cleanest deals: Shough + RJ Harvey for Jeremiyah Love (Lemon Party), or Shough straight up for Breece Hall (Bijan Mustard). Keep Henry and every starting WR — you're 4-0.",
     "positional_grades": {
       "QB": {
         "grade": "A",
-        "commentary": "Mahomes elite; Bo Nix + Shough are surplus starters — your trade currency."
+        "commentary": "Mahomes plus two tradeable starters. Shough is the chip."
       },
       "RB": {
-        "grade": "C+",
-        "commentary": "Producing but old: Henry/Javonte/Hubbard all declining. Harvey + rookies are the future. Upgrade target #1."
+        "grade": "B-",
+        "commentary": "Starters hold up against the league today, but all three are aging. The upgrade target."
       },
       "WR": {
-        "grade": "A",
-        "commentary": "Deep and starting well; clear surplus to package. Threat Level Midnight (weak WR, win-now) is a live market."
+        "grade": "A-",
+        "commentary": "Exactly four quality starters for four slots — solid, but no spare."
       },
       "TE": {
-        "grade": "A-",
-        "commentary": "Loveland is elite; steep drop after, but you only start one."
+        "grade": "A",
+        "commentary": "Loveland is elite; Hockenson is a luxury TE2."
       }
     }
   },
   "trade_strategy": {
     "trade_priority_order": [
-      "BUY a young RB while you're 4-0 — Breece Hall (efficient) or Bijan (all-in) from Bijan Mustard; Jeremiyah Love from Lemon Party",
-      "Sell Tyler Shough (QB3) to a QB-needy 0-4 team (Bijan Mustard, Lemon Party) as the centerpiece",
-      "Sell Derrick Henry (32) to a win-now buyer while he produces",
-      "Flip WR surplus (Watson/P.Washington) to Threat Level Midnight (weak WR, win-now)",
-      "Move Javonte to an RB-needy team (Quarterback Factory, Un-Kirk Penix)"
+      "Shough → a young RB from a 0-4 seller (Love from Lemon Party, or Hall from Bijan Mustard)",
+      "Optional all-in: Shough + Javonte + Harvey + 2028 4th for Bijan Robinson",
+      "Hold Henry, Hubbard, and all four starting WRs — you're 4-0",
+      "If Loveland's healthy, flip Hockenson to a TE-needy seller for an RB (Kyren Williams)",
+      "Sell Kamara to an RB-needy contender for a late pick"
     ],
     "sell_now": [
       {
         "player": "Tyler Shough",
-        "urgency": "Now",
-        "reason": "QB3 behind Mahomes/Nix in a 2-QB league. Two 0-4 teams (Bijan Mustard, Lemon Party) are QB-desperate — he's your key to a young RB.",
-        "ask": "A young RB (Breece Hall) or a Rising WR + pick"
+        "urgency": "This week",
+        "reason": "QB3 in superflex, and three sellers need a QB. His value is highest before those teams find another answer.",
+        "ask": "A young starting RB (Love, Hall)"
       },
       {
-        "player": "Derrick Henry",
-        "urgency": "This month",
-        "reason": "32 and declining, but still producing on a 4-0 team — sell high to a win-now buyer.",
-        "ask": "A younger RB or a WR + pick from Pitts/Threat Level"
+        "player": "Alvin Kamara",
+        "urgency": "This week",
+        "reason": "Bench RB at 31 — his value only drops from here.",
+        "ask": "A 2027 3rd from an RB-needy contender"
       },
       {
-        "player": "Javonte Williams",
-        "urgency": "This month",
-        "reason": "Declining at 26. Move to an RB-needy rebuilder for youth before the slide shows.",
-        "ask": "A young WR (Jordyn Tyson) or a pick"
+        "player": "T.J. Hockenson",
+        "urgency": "When Loveland's healthy",
+        "reason": "Surplus TE2 once Loveland starts; You Hate Us and Phil's are weak at TE.",
+        "ask": "An RB (Kyren Williams)"
       }
     ],
     "buy_now": [
       {
+        "player": "Jeremiyah Love",
+        "from_team": "Lemon Party",
+        "reason": "0-4 and weak at QB and RB — Shough + Harvey solves both for them.",
+        "offer": "Tyler Shough + RJ Harvey"
+      },
+      {
         "player": "Breece Hall",
         "from_team": "Bijan Mustard",
-        "reason": "0-4 and weak at QB — Shough fills their hole; Hall is a 25yo RB2 that fixes your need. The efficient buy.",
-        "offer": "Shough + RJ Harvey"
+        "reason": "0-4 and weak at QB. Simplest deal on the board.",
+        "offer": "Tyler Shough"
       },
       {
         "player": "Bijan Robinson",
         "from_team": "Bijan Mustard",
-        "reason": "The all-in swing (FC ~9,800). Only lands if Bo Nix headlines — a young franchise QB for their 0-4 rebuild. Never include Mahomes.",
-        "offer": "Bo Nix + Javonte + RJ Harvey"
+        "reason": "The all-in. Mahomes, Henry, and Nix all stay.",
+        "offer": "Tyler Shough + Javonte Williams + RJ Harvey + 2028 4th"
       },
       {
-        "player": "Jeremiyah Love",
-        "from_team": "Lemon Party",
-        "reason": "Elite young RB (5,634) on a tanking 0-4 team weak at QB+RB. Shough + a WR + pick is the conversation.",
-        "offer": "Shough + Christian Watson + 2027 2nd"
+        "player": "Kyren Williams",
+        "from_team": "You Hate Us Cuz You Anus",
+        "reason": "Selling, and weak at TE and WR.",
+        "offer": "T.J. Hockenson + Malik Washington + 2028 4th"
       }
     ],
     "do_not_trade": [
-      "Patrick Mahomes — your SF ceiling and the engine of the 4-0 start",
-      "Colston Loveland — elite 22yo TE1",
-      "DeVonta Smith — prime WR1 producing now",
-      "Bo Nix — keep unless the return is Bijan-tier (then he's the price)"
+      "Patrick Mahomes — standing rule",
+      "Colston Loveland — elite young TE1",
+      "Derrick Henry — producing starter on a 4-0 team",
+      "DeVonta Smith / Parker Washington / Christian Watson / Tee Higgins — your only four quality WRs"
     ],
-    "pick_strategy": "You're winning — picks are currency, not treasures. Package the 2027 2nd and 2nd-4th rounders to buy RB help now. Hold the 2028 1st from Bijan Mustard (0-4 = likely premium) unless it headlines a Bijan-tier deal."
-  },
-  "pick_strategy": {
-    "pick_portfolio_grade": "B",
-    "portfolio_summary": "Draft complete (slot 9): Sadiq (since traded to Bijan Mustard for a 2028 1st), Stribling, Claiborne, Randall. Hold a 2028 1st (from Bijan Mustard) and a 2027 2nd (from Pitts).",
-    "draft_day_strategy": "Historical — draft is done. Focus is now in-season buying with your surplus.",
-    "top_pick_at_109": {
-      "name": "Kenyon Sadiq (drafted, since traded)",
-      "position": "TE",
-      "reason": "Flipped to Bijan Mustard for a 2028 1st that now looks premium (they're 0-4)."
-    },
-    "fallback_options": [],
-    "round_2_4_targets": [],
-    "picks_to_protect": [
-      "2028 1st (from Bijan Mustard) — likely premium at 0-4"
-    ],
-    "picks_ok_to_package": [
-      "2027 2nd (from Pitts) and mid-round picks to buy a young RB now"
-    ]
+    "pick_strategy": "Picks are currency for a 4-0 team — package mid- and late-rounders. Hold Bijan Mustard's 2028 1st (they're 0-4, so it's trending top-3) and your own 2027 1st."
   },
   "outlook": {
-    "projected_power_rank": "1st-tier by record (4-0, 309 PF) — outperforming a mid-pack roster value. A real contender riding a hot start.",
-    "three_year_outlook": "Window is open now on the QB/WR/TE spine. Sustaining it means converting the hot start into a younger RB core before Henry/Javonte fall off.",
-    "season_narrative": "The Jabroni Beaters are 4-0 and leading the pack. Mahomes and a deep WR room are winning games; Loveland is an elite TE1. The one soft spot — an aging RB room — is exactly what a 4-0 team should spend surplus to fix. Three teams are 0-4 and selling (Bijan Mustard, Un-Kirk Penix, Lemon Party); that's your buyers' market. Strike now while your record gives you leverage and your QB/WR surplus has peak value.",
+    "projected_power_rank": "Title contender — #1 by record, #2 in points, #2 in title odds.",
+    "three_year_outlook": "Win now on the Mahomes/WR core. Adding a young RB this season also sets up 2027 as the vets age out.",
+    "season_narrative": "The Jabroni Beaters are 4-0 and producing like a top team, even though the roster ranks #7 by value. The lineup is winning, so the job is to protect it and fix the one soft spot: an aging RB room. Three 0-4 teams (Bijan Mustard, Lemon Party, Un-Kirk Penix) need a QB, and you have Shough to spend.",
     "key_risks": [
-      "Regression — 4-0 on mid-pack value won't hold without an upgrade",
-      "Henry/Javonte falling off together",
-      "Sitting on QB/WR surplus while its value decays"
+      "Regression — you're outscoring your roster value",
+      "An RB injury exposes thin depth",
+      "Waiting too long to use Shough while the sellers need a QB"
     ],
     "key_upside_factors": [
-      "Landing Hall or Bijan turns RB from a weakness into a strength",
-      "A young WR (Stribling off IR, Bech, Cyrus Allen) breaks out",
-      "The Bijan Mustard 2028 1st lands top-3"
+      "Landing Love, Hall, or Bijan makes RB a strength",
+      "Bijan Mustard's 2028 1st trending top-3",
+      "Stribling back from IR adds WR depth"
     ],
     "teams_to_watch": [
       {
         "team": "Bijan Mustard",
-        "why": "0-4, weak at QB, holds Bijan + Hall + Odunze — your prime RB seller. Shough/Nix are the keys."
+        "why": "0-4 and weak at QB. Holds Bijan and Hall — Shough is the key."
       },
       {
         "team": "Lemon Party",
-        "why": "0-4, tanking, weak QB+RB — holds Jeremiyah Love. Aspirational RB target."
+        "why": "0-4 and weak at QB and RB. Holds Jeremiyah Love."
+      },
+      {
+        "team": "Rolling Ball of Knives 1X",
+        "why": "3-1, #1 in value — your main title rival."
       },
       {
         "team": "Threat Level Midnight",
-        "why": "Win-now but weak at WR — a live buyer for your WR surplus (Watson, P.Washington)."
+        "why": "Contender that's weak at WR — a complementary trade partner."
       }
     ]
   },
-  "fa_targets": {
-    "add_immediately": [],
-    "add_if_can": [
-      {
-        "name": "Jake Tonges",
-        "position": "TE",
-        "reason": "Top FA (1,707) — only if you want a cheap Hockenson upgrade for TE2; not a need."
-      },
-      {
-        "name": "Kameron Johnson",
-        "position": "WR",
-        "reason": "24yo Prime WR (1,252) — young depth if a bench spot opens."
-      }
-    ],
-    "deep_stash": [
-      {
-        "name": "KeAndre Lambert-Smith",
-        "position": "WR",
-        "reason": "24yo (1,231) dart with upside."
-      }
-    ],
-    "waiver_strategy": "You're deep everywhere — no pressing FA need. Don't add aging depth over your own young stashes. The wire won't fix RB; a trade will. Skip QB entirely."
-  },
   "trade_finder": {
     "4046": {
-      "sell_reasoning": "Do NOT trade. Mahomes is the engine of your 4-0 start and your SF ceiling.",
-      "top_targets": [
-        {
-          "rank": 1,
-          "target_owner": "Rolling Ball of Knives 1X",
-          "their_player": "Jahmyr Gibbs",
-          "why_they_trade": "Only the value leader could approach fair — and you still say no",
-          "i_give": [
-            "Patrick Mahomes"
-          ],
-          "i_receive": [
-            "Jahmyr Gibbs"
-          ],
-          "ktc_balance": 4124,
-          "verdict": "Don't",
-          "confidence": "Low"
-        }
-      ],
-      "what_to_avoid": "Any RB-for-Mahomes deal in superflex.",
-      "alternative": "Hold — he wins you games now."
+      "sell_reasoning": "Standing rule: Mahomes is not for sale. He's the engine of the 4-0 start.",
+      "top_targets": [],
+      "what_to_avoid": "Any offer — don't take the call.",
+      "alternative": "Hold."
     },
     "11563": {
-      "sell_reasoning": "Hold unless the return is Bijan-tier. Bo Nix (4,257) is a startable SF QB and your best trade chip if you go all-in for an elite RB.",
+      "sell_reasoning": "Bench QB2 and your insurance behind Mahomes. Keep him unless he's the key that unlocks an elite RB.",
       "top_targets": [
         {
           "rank": 1,
+          "target_owner": "Lemon Party",
+          "their_player": "Jeremiyah Love",
+          "why_they_trade": "0-4 and weak at QB and RB — Nix fixes their QB spot for a decade",
+          "i_give": [
+            "Bo Nix",
+            "RJ Harvey"
+          ],
+          "i_receive": [
+            "Jeremiyah Love"
+          ],
+          "verdict": "Ask — only if Shough alone won't do it",
+          "confidence": "Medium"
+        },
+        {
+          "rank": 2,
           "target_owner": "Bijan Mustard",
           "their_player": "Bijan Robinson",
-          "why_they_trade": "0-4 and QB-desperate — Nix is the young franchise arm that pries Bijan loose",
+          "why_they_trade": "0-4, weak at QB — the Nix version of the Bijan swing",
           "i_give": [
             "Bo Nix",
             "Javonte Williams",
-            "RJ Harvey"
+            "RJ Harvey",
+            "2028 4th"
           ],
           "i_receive": [
             "Bijan Robinson"
           ],
-          "ktc_balance": -131,
-          "verdict": "Only for Bijan",
-          "confidence": "Medium"
+          "verdict": "Escalation option",
+          "confidence": "Low"
         }
       ],
-      "what_to_avoid": "Selling Nix for anything less than an elite RB — he's your SF depth.",
-      "alternative": "Hold; he's your escalation chip for the Bijan swing."
+      "what_to_avoid": "Selling him for anything but an elite RB — in superflex he's your injury insurance at QB.",
+      "alternative": "Hold; lead every deal with Shough first."
     },
     "12545": {
-      "sell_reasoning": "Your #1 sell. QB3 in a 2-QB league; two 0-4 teams are QB-starved and will pay in RB.",
+      "sell_reasoning": "Your #1 trade chip. QB3 in a 2-QB league, and three sellers (Bijan Mustard, Lemon Party, Un-Kirk Penix) are desperate for a QB.",
       "top_targets": [
         {
           "rank": 1,
-          "target_owner": "Bijan Mustard",
-          "their_player": "Breece Hall",
-          "why_they_trade": "Weak at QB, has 3 RBs — Shough fills their hole, Hall fixes yours",
+          "target_owner": "Lemon Party",
+          "their_player": "Jeremiyah Love",
+          "why_they_trade": "0-4 and needs both a QB and an RB — this deal gives them both",
           "i_give": [
             "Tyler Shough",
             "RJ Harvey"
           ],
           "i_receive": [
-            "Breece Hall"
+            "Jeremiyah Love"
           ],
-          "ktc_balance": 1436,
           "verdict": "Do it",
           "confidence": "High"
         },
         {
           "rank": 2,
-          "target_owner": "Lemon Party",
-          "their_player": "Luther Burden",
-          "why_they_trade": "0-4, tanking, weak QB — a young WR if they won't move Love",
+          "target_owner": "Bijan Mustard",
+          "their_player": "Breece Hall",
+          "why_they_trade": "0-4, weak at QB — Shough for Hall straight up",
           "i_give": [
             "Tyler Shough"
           ],
           "i_receive": [
-            "Luther Burden"
+            "Breece Hall"
           ],
-          "ktc_balance": -1036,
-          "verdict": "Fair",
+          "verdict": "Do it",
+          "confidence": "High"
+        },
+        {
+          "rank": 3,
+          "target_owner": "Bijan Mustard",
+          "their_player": "Bijan Robinson",
+          "why_they_trade": "The all-in: your QB3, a declining starter, a bench RB and a late pick for an elite RB. If they balk at Javonte, swap in the 2027 2nd.",
+          "i_give": [
+            "Tyler Shough",
+            "Javonte Williams",
+            "RJ Harvey",
+            "2028 4th"
+          ],
+          "i_receive": [
+            "Bijan Robinson"
+          ],
+          "verdict": "Ask",
           "confidence": "Medium"
         }
       ],
-      "what_to_avoid": "Selling for picks — you're 4-0, get a player who helps now.",
-      "alternative": "Hold only if both QB-needy teams pass; his value won't rise on your bench."
+      "what_to_avoid": "Taking picks back — you're 4-0; Shough should become a starting RB.",
+      "alternative": "If all three sellers pass, hold him as QB depth; a QB injury around the league makes him more valuable."
+    },
+    "12517": {
+      "sell_reasoning": "Untouchable. Elite 22-year-old TE1.",
+      "top_targets": [],
+      "what_to_avoid": "Any offer.",
+      "alternative": "Hold — and start him when healthy."
+    },
+    "7525": {
+      "sell_reasoning": "Core starting WR on a 4-0 team. You have exactly four quality WRs for four WR slots — selling one opens a hole.",
+      "top_targets": [],
+      "what_to_avoid": "Moving him for anything but a clear upgrade elsewhere.",
+      "alternative": "Hold."
+    },
+    "9487": {
+      "sell_reasoning": "Surging starting WR — hold. He's part of the four-WR core carrying the record.",
+      "top_targets": [],
+      "what_to_avoid": "Selling at a discount because he 'feels' like surplus — he isn't.",
+      "alternative": "Hold."
     },
     "3198": {
-      "sell_reasoning": "Henry is 32 but producing on a 4-0 team — textbook sell-high to a win-now buyer.",
+      "sell_reasoning": "Hold for the title run. Henry is 32, but he's a producing starter on a 4-0 team — selling now trades wins for a pick you don't need.",
+      "top_targets": [],
+      "what_to_avoid": "Rebuilders' lowball offers; any deal that makes your RB room worse this season.",
+      "alternative": "Revisit at the trade deadline only if you fall out of contention."
+    },
+    "7588": {
+      "sell_reasoning": "Starter — hold, unless he's the second piece in an RB upgrade. Swapping him into a better starter is an upgrade, not a sell.",
       "top_targets": [
         {
           "rank": 1,
-          "target_owner": "Pitts-and-Swallows",
-          "their_player": "Drake London",
-          "why_they_trade": "Win-now, buying — an aging RB for a title push, they have WR surplus",
+          "target_owner": "Phil’s Dong Dusters",
+          "their_player": "Christian McCaffrey",
+          "why_they_trade": "Long shot, selling, weak at TE — a win-now RB1 rental for your title push",
           "i_give": [
-            "Derrick Henry",
-            "Kayshon Boutte"
+            "Javonte Williams",
+            "T.J. Hockenson"
           ],
           "i_receive": [
-            "Drake London"
+            "Christian McCaffrey"
           ],
-          "ktc_balance": 348,
-          "verdict": "Ask",
+          "verdict": "Ask — only if Loveland is healthy",
           "confidence": "Medium"
         },
         {
           "rank": 2,
+          "target_owner": "Bijan Mustard",
+          "their_player": "Bijan Robinson",
+          "why_they_trade": "Part of the Shough-led Bijan package",
+          "i_give": [
+            "Tyler Shough",
+            "Javonte Williams",
+            "RJ Harvey",
+            "2028 4th"
+          ],
+          "i_receive": [
+            "Bijan Robinson"
+          ],
+          "verdict": "Ask",
+          "confidence": "Medium"
+        }
+      ],
+      "what_to_avoid": "Selling him for futures — you'd weaken a starting slot mid-title-run.",
+      "alternative": "Keep starting him."
+    },
+    "8167": {
+      "sell_reasoning": "Starting WR — hold. The only deal worth hearing is a complementary swap with a WR-needy team that returns a better RB.",
+      "top_targets": [
+        {
+          "rank": 1,
           "target_owner": "Threat Level Midnight",
           "their_player": "James Cook",
-          "why_they_trade": "Win-now, buying; you'd swap for a younger RB",
+          "why_they_trade": "Contender that's weak at WR — both teams fill a hole",
           "i_give": [
-            "Derrick Henry"
+            "Christian Watson",
+            "Chuba Hubbard"
           ],
           "i_receive": [
             "James Cook"
           ],
-          "ktc_balance": 1728,
-          "verdict": "Ask (overpay to you)",
+          "verdict": "Ask",
           "confidence": "Low"
         }
       ],
-      "what_to_avoid": "Rebuilders — none want a 32yo. Win-now only.",
-      "alternative": "He's your RB1 until a deal lands — keep starting him."
+      "what_to_avoid": "Opening a WR hole you can't fill — your 5th WR is well behind.",
+      "alternative": "Hold."
     },
-    "7588": {
-      "sell_reasoning": "Declining at 26 — move to an RB-needy rebuilder for youth.",
-      "top_targets": [
-        {
-          "rank": 1,
-          "target_owner": "Un-Kirk-comcised Penix",
-          "their_player": "Jordyn Tyson",
-          "why_they_trade": "0-4, weak at RB, WR surplus — a young WR for a startable RB",
-          "i_give": [
-            "Javonte Williams"
-          ],
-          "i_receive": [
-            "Jordyn Tyson"
-          ],
-          "ktc_balance": -321,
-          "verdict": "Do it",
-          "confidence": "Medium"
-        },
-        {
-          "rank": 2,
-          "target_owner": "Quarterback Factory",
-          "their_player": "Cam Ward",
-          "why_they_trade": "Weak at RB, QB surplus — but you don't need QB; ask a pick",
-          "i_give": [
-            "Javonte Williams"
-          ],
-          "i_receive": [
-            "2027 3rd"
-          ],
-          "ktc_balance": -2143,
-          "verdict": "Only for the pick",
-          "confidence": "Low"
-        }
-      ],
-      "what_to_avoid": "Holding into a bad stretch — sell while he still starts.",
-      "alternative": "Start him while shopping."
+    "6801": {
+      "sell_reasoning": "Starting WR — hold for the same reason as Smith and Watson: four quality WRs for four WR slots.",
+      "top_targets": [],
+      "what_to_avoid": "Any deal that leaves a WR slot to Malik Washington.",
+      "alternative": "Hold."
     },
     "7594": {
-      "sell_reasoning": "Declining depth RB — flip to a thin backfield while he projects touches.",
+      "sell_reasoning": "Starting RB — hold for the title run.",
       "top_targets": [
         {
           "rank": 1,
-          "target_owner": "Un-Kirk-comcised Penix",
-          "their_player": "Jameson Williams",
-          "why_they_trade": "0-4, weak at RB; a young WR for a body",
+          "target_owner": "Threat Level Midnight",
+          "their_player": "James Cook",
+          "why_they_trade": "Pairs with Watson in a WR-for-RB swap with a WR-needy contender",
           "i_give": [
-            "Chuba Hubbard",
-            "Kayshon Boutte"
+            "Christian Watson",
+            "Chuba Hubbard"
           ],
           "i_receive": [
-            "Jameson Williams"
+            "James Cook"
           ],
-          "ktc_balance": -475,
-          "verdict": "Fair",
-          "confidence": "Medium"
+          "verdict": "Ask",
+          "confidence": "Low"
         }
       ],
-      "what_to_avoid": "Packaging young pieces with him — he's the asset.",
-      "alternative": "Hold as insurance until rookies pass him."
+      "what_to_avoid": "Selling him for futures mid-contention.",
+      "alternative": "Keep starting him."
     },
     "12489": {
-      "sell_reasoning": "Hold as your young-RB piece — but he's the natural sweetener in a Hall/Bijan deal since you're acquiring RB.",
+      "sell_reasoning": "Bench RB with real value — your best sweetener for an RB upgrade.",
       "top_targets": [
         {
           "rank": 1,
-          "target_owner": "Bijan Mustard",
-          "their_player": "Breece Hall",
-          "why_they_trade": "Pairs with Shough to land Hall",
+          "target_owner": "Lemon Party",
+          "their_player": "Jeremiyah Love",
+          "why_they_trade": "Pairs with Shough for their QB + RB needs",
           "i_give": [
             "Tyler Shough",
             "RJ Harvey"
           ],
           "i_receive": [
-            "Breece Hall"
+            "Jeremiyah Love"
           ],
-          "ktc_balance": 1436,
-          "verdict": "Use in the Hall deal",
+          "verdict": "Do it",
           "confidence": "High"
         }
       ],
-      "what_to_avoid": "Selling him cheap standalone.",
-      "alternative": "Hold if you don't land a bigger RB."
+      "what_to_avoid": "Selling him alone at FantasyCalc's low number — KTC rates him much higher.",
+      "alternative": "Hold as RB4 if no upgrade lands."
     },
-    "4035": {
-      "sell_reasoning": "31, declining, buried — any return beats zero.",
+    "5844": {
+      "sell_reasoning": "Only sellable if Loveland is healthy and starting — then Hockenson is surplus, and several sellers are weak at TE.",
       "top_targets": [
         {
           "rank": 1,
-          "target_owner": "Quarterback Factory",
+          "target_owner": "You Hate Us Cuz You Anus",
+          "their_player": "Kyren Williams",
+          "why_they_trade": "Selling, and weak at TE and WR — this fills both",
+          "i_give": [
+            "T.J. Hockenson",
+            "Malik Washington",
+            "2028 4th"
+          ],
+          "i_receive": [
+            "Kyren Williams"
+          ],
+          "verdict": "Do it (if Loveland's healthy)",
+          "confidence": "Medium"
+        },
+        {
+          "rank": 2,
+          "target_owner": "Phil’s Dong Dusters",
+          "their_player": "Christian McCaffrey",
+          "why_they_trade": "Weak at TE — Hockenson headlines their side of a CMC deal",
+          "i_give": [
+            "Javonte Williams",
+            "T.J. Hockenson"
+          ],
+          "i_receive": [
+            "Christian McCaffrey"
+          ],
+          "verdict": "Ask",
+          "confidence": "Medium"
+        }
+      ],
+      "what_to_avoid": "Selling him while Loveland is out — you'd be starting Helm.",
+      "alternative": "Hold until Loveland is back."
+    },
+    "11610": {
+      "sell_reasoning": "Bench WR5 — a useful sweetener.",
+      "top_targets": [
+        {
+          "rank": 1,
+          "target_owner": "You Hate Us Cuz You Anus",
+          "their_player": "Kyren Williams",
+          "why_they_trade": "Rounds out the Hockenson package",
+          "i_give": [
+            "T.J. Hockenson",
+            "Malik Washington",
+            "2028 4th"
+          ],
+          "i_receive": [
+            "Kyren Williams"
+          ],
+          "verdict": "Package use",
+          "confidence": "Medium"
+        }
+      ],
+      "what_to_avoid": "Cutting him — role players close trade gaps.",
+      "alternative": "Hold as depth."
+    },
+    "9504": {
+      "sell_reasoning": "Bench WR — sweetener only.",
+      "top_targets": [],
+      "what_to_avoid": "Cutting him.",
+      "alternative": "Hold as trade grease."
+    },
+    "4035": {
+      "sell_reasoning": "31, declining, on your bench — sell to a contender that needs RB depth for any return.",
+      "top_targets": [
+        {
+          "rank": 1,
+          "target_owner": "Rolling Ball of Knives 1X",
           "their_player": "2027 3rd",
-          "why_they_trade": "Weak at RB — depth for their push",
+          "why_they_trade": "Contender that's weak at RB and buying depth",
           "i_give": [
             "Alvin Kamara"
           ],
           "i_receive": [
             "2027 3rd"
           ],
-          "ktc_balance": 23,
-          "verdict": "Take it",
+          "verdict": "Do it",
           "confidence": "Medium"
         }
       ],
-      "what_to_avoid": "Waiting — value only drops.",
-      "alternative": "Bye-week fill until rookies pass him."
-    },
-    "7525": {
-      "sell_reasoning": "Core prime WR1, producing on a 4-0 team — only move for a Jeremiyah Love-tier RB.",
-      "top_targets": [
-        {
-          "rank": 1,
-          "target_owner": "Lemon Party",
-          "their_player": "Jeremiyah Love",
-          "why_they_trade": "0-4 tank; Smith headlines a real package",
-          "i_give": [
-            "DeVonta Smith",
-            "Tyler Shough"
-          ],
-          "i_receive": [
-            "Jeremiyah Love"
-          ],
-          "ktc_balance": -1268,
-          "verdict": "Only as the big swing",
-          "confidence": "Low"
-        }
-      ],
-      "what_to_avoid": "Selling him for depth or picks — he wins games now.",
-      "alternative": "Hold."
-    },
-    "9487": {
-      "sell_reasoning": "Parker Washington (3,717) has surged into a startable WR — sell high or use to headline an RB deal.",
-      "top_targets": [
-        {
-          "rank": 1,
-          "target_owner": "Threat Level Midnight",
-          "their_player": "James Cook",
-          "why_they_trade": "Win-now but weak at WR — your surplus WR for their surplus RB",
-          "i_give": [
-            "Parker Washington"
-          ],
-          "i_receive": [
-            "James Cook"
-          ],
-          "ktc_balance": 1601,
-          "verdict": "Ask — great fit",
-          "confidence": "Medium"
-        }
-      ],
-      "what_to_avoid": "Underselling a surging asset.",
-      "alternative": "Hold as a WR starter; he's helping you win."
-    },
-    "8167": {
-      "sell_reasoning": "WR surplus with name value — a strong package piece; Threat Level (weak WR) is the market.",
-      "top_targets": [
-        {
-          "rank": 1,
-          "target_owner": "Threat Level Midnight",
-          "their_player": "De'Von Achane",
-          "why_they_trade": "Win-now, weak WR — pair Watson to land a young RB",
-          "i_give": [
-            "Christian Watson",
-            "Tyler Shough"
-          ],
-          "i_receive": [
-            "De'Von Achane"
-          ],
-          "ktc_balance": -925,
-          "verdict": "Ask",
-          "confidence": "Low"
-        },
-        {
-          "rank": 2,
-          "target_owner": "Lemon Party",
-          "their_player": "Jeremiyah Love",
-          "why_they_trade": "Add to a Love package",
-          "i_give": [
-            "Christian Watson",
-            "Tyler Shough",
-            "2027 2nd"
-          ],
-          "i_receive": [
-            "Jeremiyah Love"
-          ],
-          "ktc_balance": -45,
-          "verdict": "Package use",
-          "confidence": "Medium"
-        }
-      ],
-      "what_to_avoid": "Selling standalone cheap — use him to close an RB deal.",
-      "alternative": "Hold; he starts for you."
-    },
-    "6801": {
-      "sell_reasoning": "Core prime WR — hold unless it returns a young RB starter.",
-      "top_targets": [
-        {
-          "rank": 1,
-          "target_owner": "Threat Level Midnight",
-          "their_player": "James Cook",
-          "why_they_trade": "Win-now, weak at WR — a clean WR-for-RB swap",
-          "i_give": [
-            "Tee Higgins"
-          ],
-          "i_receive": [
-            "James Cook"
-          ],
-          "ktc_balance": 2196,
-          "verdict": "Ask (overpay to you)",
-          "confidence": "Low"
-        }
-      ],
-      "what_to_avoid": "Picks or darts back — Higgins only moves for a young starter.",
-      "alternative": "Hold and start him."
-    },
-    "11610": {
-      "sell_reasoning": "Malik Washington (1,167) — bench WR depth, best as a sweetener.",
-      "top_targets": [],
-      "what_to_avoid": "Standalone sells for scraps.",
-      "alternative": "Hold / package grease."
-    },
-    "9504": {
-      "sell_reasoning": "Your designated sweetener — a real WR that balances packages.",
-      "top_targets": [
-        {
-          "rank": 1,
-          "target_owner": "Any team",
-          "their_player": "package balancer",
-          "why_they_trade": "Closes value gaps in the Henry/Hubbard deals above",
-          "i_give": [
-            "Kayshon Boutte"
-          ],
-          "i_receive": [
-            "(see packages)"
-          ],
-          "ktc_balance": 0,
-          "verdict": "Use in packages",
-          "confidence": "High"
-        }
-      ],
-      "what_to_avoid": "Cutting him — role WRs win trade margins.",
-      "alternative": "Hold as trade grease."
+      "what_to_avoid": "Waiting — his value only drops.",
+      "alternative": "Bye-week fill if nobody bites."
     },
     "13413": {
-      "sell_reasoning": "23yo rookie WR stash (1,052) — hold for upside.",
-      "top_targets": [],
-      "what_to_avoid": "Trading youth for aging depth.",
-      "alternative": "Taxi stash."
-    },
-    "12483": {
-      "sell_reasoning": "23yo Rising WR (746) with draft capital — hold.",
+      "sell_reasoning": "23-year-old rookie WR stash — hold for upside.",
       "top_targets": [],
       "what_to_avoid": "Using him as filler.",
-      "alternative": "Hold."
-    },
-    "12517": {
-      "sell_reasoning": "Untouchable. Elite 22yo TE1 — a weekly edge for a decade.",
-      "top_targets": [
-        {
-          "rank": 1,
-          "target_owner": "Rolling Ball of Knives 1X",
-          "their_player": "Trey McBride",
-          "why_they_trade": "Only an elite-TE-for-TE talk even starts",
-          "i_give": [
-            "Colston Loveland"
-          ],
-          "i_receive": [
-            "Trey McBride"
-          ],
-          "ktc_balance": 3005,
-          "verdict": "Don't — reference only",
-          "confidence": "Low"
-        }
-      ],
-      "what_to_avoid": "Any even swap — you can't replace him.",
-      "alternative": "Hold."
-    },
-    "5844": {
-      "sell_reasoning": "You start one TE and Loveland owns it — Hockenson is a starter wasting on your bench. Two 0-4 teams are weak at TE.",
-      "top_targets": [
-        {
-          "rank": 1,
-          "target_owner": "You Hate Us Cuz You Anus",
-          "their_player": "Kyren Williams",
-          "why_they_trade": "Weak at TE; pair with a WR to land their RB",
-          "i_give": [
-            "T.J. Hockenson",
-            "Tee Higgins"
-          ],
-          "i_receive": [
-            "Kyren Williams"
-          ],
-          "ktc_balance": 762,
-          "verdict": "Ask",
-          "confidence": "Medium"
-        },
-        {
-          "rank": 2,
-          "target_owner": "Phil’s Dong Dusters",
-          "their_player": "D'Andre Swift",
-          "why_they_trade": "Weak at TE, selling — Hockenson + piece for an RB",
-          "i_give": [
-            "T.J. Hockenson",
-            "Christian Watson"
-          ],
-          "i_receive": [
-            "D'Andre Swift"
-          ],
-          "ktc_balance": -1641,
-          "verdict": "Package use",
-          "confidence": "Low"
-        }
-      ],
-      "what_to_avoid": "Selling both Hockenson and Helm — keep one behind Loveland.",
-      "alternative": "Value rises if a contender's TE gets hurt."
-    },
-    "12502": {
-      "sell_reasoning": "Rising 23yo TE (863) — cheap Loveland insurance; move only for a premium from a TE-needy team.",
-      "top_targets": [
-        {
-          "rank": 1,
-          "target_owner": "Phil’s Dong Dusters",
-          "their_player": "2027 3rd",
-          "why_they_trade": "Weak at TE — cheap long-term fix for them",
-          "i_give": [
-            "Gunnar Helm"
-          ],
-          "i_receive": [
-            "2027 3rd"
-          ],
-          "ktc_balance": 232,
-          "verdict": "Fair",
-          "confidence": "Medium"
-        }
-      ],
-      "what_to_avoid": "Selling both TEs behind Loveland.",
-      "alternative": "Hold; TE2s break out late."
+      "alternative": "Taxi stash."
     },
     "13347": {
-      "sell_reasoning": "Hold. Demond Claiborne (22, rookie RB) is part of the young backfield answer you're building toward while the vets age out — don't sell the solution to your one weakness.",
+      "sell_reasoning": "22-year-old rookie RB — part of the long-term answer to your aging RB room. Hold.",
       "top_targets": [],
-      "what_to_avoid": "Flipping a 22yo RB for aging depth or a small pick — his value is upside you drafted for.",
-      "alternative": "Taxi stash; he's insurance behind any RB you trade for and a piece of the post-Henry room."
+      "what_to_avoid": "Flipping him for aging depth.",
+      "alternative": "Taxi stash."
+    },
+    "12502": {
+      "sell_reasoning": "TE3 insurance behind Loveland and Hockenson — hold; cheap sweetener if needed.",
+      "top_targets": [],
+      "what_to_avoid": "Selling Helm and Hockenson together.",
+      "alternative": "Hold."
     }
-  },
-  "_roster_hash": "eae19fb8"
+  }
 }

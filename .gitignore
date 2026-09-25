@@ -17,3 +17,4 @@ state/*.log
 
 # Generated output (rebuilt from `python3 build.py`)
 output/
+state/context.json

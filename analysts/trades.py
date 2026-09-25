@@ -42,8 +42,13 @@ class BuyTarget:
     rationale: str
 
 
-def _sell_reasons(p: EnrichedPlayer, surplus: list[str], qb_count: int, qb_rank: int) -> list[str]:
+def _sell_reasons(p: EnrichedPlayer, surplus: list[str], qb_count: int, qb_rank: int,
+                  contending: bool) -> list[str]:
     reasons = []
+    if p.position == "QB" and qb_count >= 3 and qb_rank >= qb_count - 1:
+        reasons.append("Superflex only needs 2 QBs — you're carrying a tradeable QB")
+    if contending and p.slot_type == "starter":
+        return reasons      # in a title race, producing starters are holds, not sells
     if p.age_score < 0.75 and p.market_value > 2500:
         reasons.append(f"Aging ({p.dynasty_window}, age {p.age}) but still valuable — sell window")
     if p.trend_7day < -150:
@@ -53,13 +58,12 @@ def _sell_reasons(p: EnrichedPlayer, surplus: list[str], qb_count: int, qb_rank:
     if p.injury_flag and p.market_value > 2200:
         note = f" ({p.injury_history})" if p.injury_history else ""
         reasons.append(f"Injury risk{note} while value is still high")
-    if p.position == "QB" and qb_count >= 3 and qb_rank >= qb_count - 1:
-        reasons.append("Superflex only needs 2 QBs — you're carrying a tradeable QB")
     return reasons
 
 
 def find_sell_candidates(my_enriched: list[EnrichedPlayer], metrics: dict,
-                         opponents: list[OpponentProfile]) -> list[SellCandidate]:
+                         opponents: list[OpponentProfile],
+                         contending: bool = False) -> list[SellCandidate]:
     surplus = metrics["surplus_positions"]
     qbs = sorted([p for p in my_enriched if p.position == "QB"], key=lambda x: -x.market_value)
     qb_count = len(qbs)
@@ -67,7 +71,7 @@ def find_sell_candidates(my_enriched: list[EnrichedPlayer], metrics: dict,
 
     candidates: list[SellCandidate] = []
     for p in my_enriched:
-        reasons = _sell_reasons(p, surplus, qb_count, qb_rank.get(p.player_id, 0))
+        reasons = _sell_reasons(p, surplus, qb_count, qb_rank.get(p.player_id, 0), contending)
         if not reasons:
             continue
         urgency = "This week" if (p.trend_7day < -150 or p.injury_flag) else \
@@ -115,7 +119,10 @@ def build_targets(candidate: SellCandidate,
 
 def find_buy_targets(opponents: list[OpponentProfile],
                      opponent_enriched: dict[str, list[EnrichedPlayer]],
-                     my_weak: list[str]) -> list[BuyTarget]:
+                     my_weak: list[str], needs: dict | None = None,
+                     contending: bool = False, contention: dict | None = None) -> list[BuyTarget]:
+    need_pos = {pos for pos, n in (needs or {}).items() if n["need"] >= 0.3}
+    odds = {o: c.status for o, c in (contention or {}).items()}
     buys: list[BuyTarget] = []
     for opp in opponents:
         for p in opponent_enriched.get(opp.owner_id, []):
@@ -123,28 +130,57 @@ def find_buy_targets(opponents: list[OpponentProfile],
             rising = p.trend_7day > 100 and p.value_tier in ("Depth", "Stash")
             est_rookie = p.is_rookie and p.market_value > 1500
             fills = p.position in my_weak and p.market_value >= 2000
-            if not (young_cheap or rising or est_rookie or fills):
+            upgrade = contending and p.position in need_pos and p.market_value >= 2500
+            if not (young_cheap or rising or est_rookie or fills or upgrade):
                 continue
             why = []
+            if upgrade:
+                why.append(f"proven starter at your {p.position} need — a title-run upgrade")
             if fills:
                 why.append(f"fills your {p.position} need")
             if young_cheap:
                 why.append(f"young ({p.dynasty_window}) below peak price")
             if rising:
                 why.append(f"rising {p.trend_7day:+d}")
-            if opp.trade_motivation == "Selling":
+            if odds.get(opp.owner_id) == "Long shot":
+                why.append("their season is slipping — likely seller")
+            elif opp.trade_motivation == "Selling":
                 why.append("their team is selling")
             buys.append(BuyTarget(player=p, from_team=opp.team_name, owner_id=opp.owner_id,
                                   rationale=", ".join(why)))
-    buys.sort(key=lambda b: -b.player.market_value)
+    # Realism first: long shots sell, contenders don't. Then by value.
+    order = {"Long shot": 0, "Bubble": 1, "Contender": 2}
+    buys.sort(key=lambda b: (order.get(odds.get(b.owner_id), 1), -b.player.market_value))
     return buys[:12]
 
 
-def run_trade_discovery(my_enriched, metrics, opponents, opponent_enriched):
-    candidates = find_sell_candidates(my_enriched, metrics, opponents)
+def run_trade_discovery(my_enriched, metrics, opponents, opponent_enriched,
+                        needs=None, contending=False, contention=None):
+    candidates = find_sell_candidates(my_enriched, metrics, opponents, contending)
     my_weak = metrics["weak_positions"]
     for c in candidates:
         c.targets = build_targets(c, opponents, opponent_enriched, my_weak)
-    buys = find_buy_targets(opponents, opponent_enriched, my_weak)
-    log.info("Trade discovery: %d sell candidates, %d buy targets", len(candidates), len(buys))
+    buys = find_buy_targets(opponents, opponent_enriched, my_weak, needs, contending, contention)
+    log.info("Trade discovery (%s mode): %d sell candidates, %d buy targets",
+             "contender" if contending else "standard", len(candidates), len(buys))
     return candidates, buys
+
+
+def reprice_packages(trade_finder: dict, value_by_name: dict[str, int]) -> int:
+    """Recompute every Trade Finder package from CURRENT market values so the
+    math never goes stale. The analysis supplies who to target; the numbers
+    (balance + fairness label) always come from live values. Returns # repriced."""
+    n = 0
+    for entry in trade_finder.values():
+        for t in entry.get("top_targets", []):
+            give, get = t.get("i_give") or [], t.get("i_receive") or []
+            if not (give and get and all(x in value_by_name for x in give + get)):
+                continue
+            gv = sum(value_by_name[x] for x in give)
+            rv = sum(value_by_name[x] for x in get)
+            pct = (rv - gv) / gv if gv else 0
+            t["ktc_balance"] = rv - gv
+            t["fairness"] = ("You win" if pct >= 0.05 else "Fair" if pct >= -0.05
+                             else "Slight overpay" if pct >= -0.15 else "Overpay")
+            n += 1
+    return n

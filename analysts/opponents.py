@@ -97,6 +97,47 @@ def classify_opponents(data: SleeperData,
     return profiles
 
 
+@dataclass
+class Contention:
+    status: str             # Contender | Bubble | Long shot
+    rank: int               # composite rank, 1 = best title odds
+    record_rank: int
+    pf_rank: int
+    value_rank: int
+    games: int
+
+
+def assess_contention(data: SleeperData, profiles: list[OpponentProfile],
+                      my_total: int) -> dict[str, Contention]:
+    """Can each team win THIS year? Same yardstick for all 12 (keyed by owner_id):
+    record + points-for once 3+ games are played, roster value before that."""
+    value = {p.owner_id: p.total_value for p in profiles}
+    value[data.user_id] = my_total
+    rows = data.all_rosters
+    games = max((r.wins + r.losses + r.ties for r in rows), default=0)
+
+    def rank(key) -> dict[str, int]:
+        return {r.owner_id: i + 1 for i, r in enumerate(sorted(rows, key=key))}
+
+    def win_pct(r) -> float:
+        return (r.wins + 0.5 * r.ties) / max(r.wins + r.losses + r.ties, 1)
+
+    rec = rank(lambda r: (-win_pct(r), -r.fpts))
+    pf = rank(lambda r: -r.fpts)
+    val = rank(lambda r: -value.get(r.owner_id, 0))
+    if games >= 3:
+        score = {o: 0.5 * rec[o] + 0.3 * pf[o] + 0.2 * val[o] for o in rec}
+    else:
+        score = {o: float(v) for o, v in val.items()}
+
+    playoff = (data.league.get("settings") or {}).get("playoff_teams") or 6
+    out: dict[str, Contention] = {}
+    for i, o in enumerate(sorted(score, key=score.get), 1):
+        status = "Contender" if i <= playoff - 2 else "Bubble" if i <= playoff + 1 else "Long shot"
+        out[o] = Contention(status, i, rec[o], pf[o], val[o], games)
+    return out
+
+
 def _classify(total: int, all_vals: list[int], avg_age: float, pick_count: int):
     """No records exist; use roster value + age + pick capital."""
     hi = sorted(all_vals, reverse=True)

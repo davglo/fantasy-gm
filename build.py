@@ -21,10 +21,12 @@ from analysts.opponents import assess_contention, classify_opponents
 from analysts.picks import build_pick_portfolio, build_war_room, slot_for_round
 from analysts.roster import enrich_all_rosters, enrich_roster, positional_needs
 from analysts.trades import reprice_packages, run_trade_discovery
+from analysts.vegas import vegas_signals
 from analysts.waivers import scan_free_agents, waiver_summary
 from fetchers.fantasycalc import fetch_fc_values, load_fc_pick_values, load_fc_values
 from fetchers.rankings import fetch_ktc_rankings, load_rankings_cache
 from fetchers.sleeper import fetch_all_sleeper_data, fetch_draft_picks
+from fetchers.vegas import fetch_vegas
 
 SLEEPER_USERNAME = "thejabronibeatr"
 SLEEPER_LEAGUE_ID = "1312154605395652608"
@@ -45,7 +47,8 @@ CONTEXT_FILE = Path(__file__).resolve().parent / "state" / "context.json"
 
 
 def _write_context(data, metrics, my_enriched, opponent_enriched, opponent_profiles,
-                   contention, needs, sell_candidates, buys, fa_analysis, fc_picks, movable) -> None:
+                   contention, needs, sell_candidates, buys, fa_analysis, fc_picks, movable,
+                   vegas, vegas_sig) -> None:
     """Live-data digest the weekly analysis refresh reads (docs/weekly-refresh.md)."""
     from analysts.ai import league_roster_hash
 
@@ -80,6 +83,9 @@ def _write_context(data, metrics, my_enriched, opponent_enriched, opponent_profi
         "free_agents": [{"name": f.player.name, "pos": f.player.position, "value": f.player.market_value,
                          "priority": f.add_priority, "reason": f.reason} for f in fa_analysis[:12]],
         "pick_values": fc_picks,
+        "vegas_this_week": {p.name: vegas["teams"][p.team] for p in my_enriched
+                            if vegas and p.team in vegas["teams"] and p.slot_type == "starter"},
+        "vegas_signals": vegas_sig,
     }
     CONTEXT_FILE.write_text(json.dumps(ctx, indent=2, ensure_ascii=False))
 
@@ -163,6 +169,13 @@ def main() -> None:
                                                 needs, contending=me.status == "Contender",
                                                 contention=contention)
 
+    log.info("Fetching betting lines...")
+    week = (data.league.get("settings") or {}).get("leg") or 1
+    vegas = fetch_vegas(str(data.league.get("season")), week) if data.league.get("status") == "in_season" else {}
+    vegas_sig = vegas_signals(my_enriched, opponent_profiles, opponent_enriched, contention, needs, vegas)
+    log.info("Vegas signals: %d sell-high, %d buy-low",
+             len(vegas_sig["sell_high"]), len(vegas_sig["buy_low"]))
+
     log.info("Analyzing picks%s...", "" if draft_done else " + War Room")
     my_slot = _my_ktc_slot(data, rank_by_id, fc_values)
     pick_portfolio, pick_total = build_pick_portfolio(data, my_slot, fc_picks)
@@ -192,13 +205,15 @@ def main() -> None:
              f"missing Trade Finder for {missing}; unpriced names {unpriced}")
 
     _write_context(data, metrics, my_enriched, opponent_enriched, opponent_profiles,
-                   contention, needs, sell_candidates, buys, fa_analysis, fc_picks, movable)
+                   contention, needs, sell_candidates, buys, fa_analysis, fc_picks, movable,
+                   vegas, vegas_sig)
 
     log.info("Rendering dashboard...")
     from renderer.dashboard import render_dashboard
     out = render_dashboard(data, metrics, my_enriched, opponent_profiles, sell_candidates, buys,
                            pick_portfolio, pick_total, war_room, fa_analysis, ai, rankings,
-                           contention=contention, fa_summary=fa_summary)
+                           contention=contention, fa_summary=fa_summary,
+                           vegas=vegas, vegas_sig=vegas_sig)
     log.info("Done -> %s", out)
 
 

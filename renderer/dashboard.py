@@ -91,7 +91,7 @@ def _bsc(window: str) -> tuple[str, str]:
 # ---------------------------------------------------------------------------
 def render_dashboard(data, metrics, my_enriched, opponent_profiles, sell_candidates, buys,
                      pick_portfolio, pick_total, war_room, fa_analysis, ai, rankings,
-                     contention=None, fa_summary="") -> str:
+                     contention=None, fa_summary="", vegas=None, vegas_sig=None) -> str:
     # Draft state comes from Sleeper, not a hardcoded date.
     draft = data.draft
     draft_done = draft.get("status") == "complete"
@@ -144,8 +144,8 @@ def render_dashboard(data, metrics, my_enriched, opponent_profiles, sell_candida
     parts.append("</nav>")
 
     parts.append(_tab_overview(ai, metrics, opponent_profiles, contention, data.user_id))
-    parts.append(_tab_roster(my_enriched))
-    parts.append(_tab_trades(ai, sell_candidates, buys, my_enriched))
+    parts.append(_tab_roster(my_enriched, (vegas or {}).get("teams", {})))
+    parts.append(_tab_trades(ai, sell_candidates, buys, my_enriched, vegas_sig))
     if not draft_done:
         parts.append(_tab_warroom(ai, war_room, pick_portfolio, pick_total, days_to_draft, draft_soon))
     parts.append(_tab_fa(fa_analysis, fa_summary))
@@ -277,7 +277,19 @@ def _tab_overview(ai, metrics, opponents, contention, my_owner_id) -> str:
     return "".join(p)
 
 
-def _tab_roster(my_enriched) -> str:
+def _vegas_chip(team: str, teams: dict) -> str:
+    """This week's Vegas implied points for the player's NFL team (or BYE)."""
+    t = teams.get(team)
+    if not teams or team == "FA" or not t:
+        return ""
+    if t["implied"] is None:
+        return ' · <span class="badge b-mut">BYE</span>'
+    cls = "b-grn" if t["implied"] >= 25 else "b-red" if t["implied"] < 20 else "b-blue"
+    where = "vs" if t["home"] else "@"
+    return f' · <span class="badge {cls}" title="Vegas implied team points this week">Vegas {t["implied"]:g} {where} {t["opp"]}</span>'
+
+
+def _tab_roster(my_enriched, vegas_teams=None) -> str:
     p = ['<div class="tab" id="t1">']
     groups = [("Starters", "starter"), ("Bench", "bench"), ("Taxi", "taxi"), ("IR", "ir")]
     for title, slot in groups:
@@ -296,7 +308,8 @@ def _tab_roster(my_enriched) -> str:
                      f'<div class="nm">{_esc(x.name)}{inj}</div>'
                      f'<div class="meta">{x.position} · {x.team} · age {x.age} · '
                      f'<span class="badge {ccls}">{chip}</span> '
-                     f'<span class="badge {_tier_cls(x.value_tier)}">{x.value_tier}</span> {x.dynasty_window}</div></div>'
+                     f'<span class="badge {_tier_cls(x.value_tier)}">{x.value_tier}</span> {x.dynasty_window}'
+                     f'{_vegas_chip(x.team, vegas_teams or {})}</div></div>'
                      f'<div style="text-align:right"><div class="ktc {_grade_cls("A" if x.market_value>3000 else "C")}" '
                      f'style="color:inherit">{x.market_value:,} <span class="muted" style="font-size:11px">{src}</span></div>'
                      f'<div class="meta">{_trend(x.trend_7day)} '
@@ -307,7 +320,35 @@ def _tab_roster(my_enriched) -> str:
     return "".join(p) + "</div>"
 
 
-def _tab_trades(ai, sell_candidates, buys, my_enriched) -> str:
+def _vegas_card(sig) -> str:
+    if not sig or not (sig["sell_high"] or sig["buy_low"]):
+        return ""
+    p = ['<div class="grid g2 sec"><div class="card"><h3>Sell High — beating Vegas</h3>'
+         '<p class="muted" style="font-size:12px">Their NFL team is scoring well above its betting totals; '
+         'that usually cools off. Starters on a contender are still holds — this is a price check.</p>']
+    for x in sig["sell_high"]:
+        tag = ' <span class="badge b-mut">starter</span>' if x["starter"] else ""
+        p.append(f'<div style="margin-bottom:8px"><b>{_esc(x["name"])}</b> '
+                 f'<span class="muted">{x["pos"]} · {x["team"]} · {x["value"]:,}</span>{tag}'
+                 f'<div class="muted" style="font-size:12px">{_esc(x["why"])}</div></div>')
+    if not sig["sell_high"]:
+        p.append('<p class="muted">None of your players are on a team running hot.</p>')
+    p.append('</div><div class="card"><h3>Buy Low — missing Vegas</h3>'
+             '<p class="muted" style="font-size:12px">Their NFL team is scoring well below its betting totals; '
+             'the market may be underpricing them. Your need positions first, then sellers.</p>')
+    for x in sig["buy_low"]:
+        need = ' <span class="badge b-grn">need</span>' if x["need"] else ""
+        p.append(f'<div style="margin-bottom:8px"><b>{_esc(x["name"])}</b> '
+                 f'<span class="muted">{x["pos"]} · {x["team"]} · {x["value"]:,} · from {_esc(x["from"])} '
+                 f'({x["owner_status"]})</span>{need}'
+                 f'<div class="muted" style="font-size:12px">{_esc(x["why"])}</div></div>')
+    if not sig["buy_low"]:
+        p.append('<p class="muted">No rostered players on teams running cold.</p>')
+    p.append("</div></div>")
+    return "".join(p)
+
+
+def _tab_trades(ai, sell_candidates, buys, my_enriched, vegas_sig=None) -> str:
     ts = ai.get("trade_strategy", {})
     p = ['<div class="tab" id="t2">']
 
@@ -346,6 +387,8 @@ def _tab_trades(ai, sell_candidates, buys, my_enriched) -> str:
             p.append(f'<div class="card sec"><h3>Pick Strategy</h3><p class="muted">{_esc(ts["pick_strategy"])}</p></div>')
     else:
         p.append('<div class="card"><p class="muted">AI trade strategy unavailable — run without --dry-run.</p></div>')
+
+    p.append(_vegas_card(vegas_sig))
 
     # computed sell candidates fallback table
     p.append('<div class="card sec"><h3>Computed Sell Candidates</h3>')

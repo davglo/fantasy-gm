@@ -13,6 +13,7 @@ __pycache__/
 state/players_nfl.json
 state/rankings_cache.json
 state/fc_values.json
+state/vegas_cache.json
 state/*.log
 
 # Generated output (rebuilt from `python3 build.py`)

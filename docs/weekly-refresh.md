@@ -31,6 +31,10 @@ refresh only updates the written takes.
   `motivation` "Selling"). Don't propose buying a star from a contender.
 - **Needs come from `me.needs`** (0-1 per position; ≥0.3 is a real need). Keep
   every recommendation consistent with them.
+- **Use the betting lines.** `vegas_signals.buy_low` are players on NFL teams
+  scoring well under their Vegas totals (buy-low leads); `sell_high` are mine on
+  teams running hot (price checks — contending starters stay holds).
+  `vegas_this_week` has each starter's implied team points for lineup calls.
 - **Propose fair packages** using the values in `context.json` (within ~10%).
   The build recomputes every balance live and labels it; don't invent numbers.
 - **Names must match exactly** — every name in `i_give` / `i_receive` must be a

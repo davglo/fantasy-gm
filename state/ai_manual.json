@@ -1,101 +1,101 @@
 {
-  "_generated_at": "2026-10-27",
-  "_roster_hash": "3afe0c12",
+  "_generated_at": "2026-11-03",
+  "_roster_hash": "fa441235",
   "roster_grade": {
-    "overall_grade": "A-",
-    "headline": "11-3 and #1 in title odds. Shough is now on the bench, so sell him for Jeremiyah Love and get younger at RB",
-    "window_explanation": "#1 composite title odds in Week 7: #1 by record (11-3), #1 in points for (1,001), #5 by roster value. That's a win-now team. Keep every producing starter and spend true surplus (Shough, Daniels, bench WRs, Kamara, picks) on the one soft spot: an aging RB room (need 0.4).",
+    "overall_grade": "A",
+    "headline": "13-3, most points, #1 in title odds. McCaffrey is in; now turn bench QB Shough into Jeremiyah Love and get younger at RB",
+    "window_explanation": "#1 composite title odds in Week 8: #1 by record (13-3), #1 in points for (1,157), #4 by roster value. That's a win-now team. Keep every producing starter (Mahomes, McCaffrey, Henry, Javonte, Hubbard unless swapped for a better RB, Nix, the starting WRs, Loveland) and spend true surplus (Shough, Daniels, DeVonta Smith, Gunnar Helm, bench WRs, picks) on the one soft spot: an aging RB room (need 0.4, aging 1.0).",
     "strengths": [
       {
         "label": "Best record and most points",
-        "detail": "11-3 with 1,001 points for. One game clear of Buck-ee's and Phil's (10-4), and 28 points ahead of dickcole2410 (973) for the PF lead."
+        "detail": "13-3 with 1,157 points for. One game clear of Buck-ee's and Phil's (12-4), and 53 points ahead of dickcole2410 (1,104) for the PF lead."
       },
       {
-        "label": "Spare QB on the bench",
-        "detail": "Mahomes and Nix are starting, with Shough (3,930) and Jalon Daniels on the bench. Superflex only starts two, so Shough and Daniels are both tradeable. QB need is 0.04."
+        "label": "McCaffrey added to the lineup",
+        "detail": "Christian McCaffrey (4,604) is now starting at RB. San Francisco is scoring 3.7 a game over Vegas, so his numbers are strong. Hold him for the title run."
       },
       {
-        "label": "Deep WR group",
-        "detail": "Watson and Higgins are starting, with Parker Washington (4,105) and DeVonta Smith (2,973) on the bench and Stribling on IR. WR need is 0.0, so one bench WR can be moved."
+        "label": "Spare QBs on the bench",
+        "detail": "Mahomes and Nix start, with Shough (3,865) and Jalon Daniels (670) on the bench. Superflex only starts two, so both are tradeable. QB need is 0.02."
       },
       {
-        "label": "Loveland plus extra picks",
-        "detail": "Young TE1 in Loveland, Hockenson behind him, and an extra 2028 1st and 2027 2nd to deal from."
+        "label": "Deep WR and TE groups",
+        "detail": "Parker Washington, Higgins, and Watson start; DeVonta Smith (2,792) and Malik Washington sit, Stribling is on IR. WR need is 0.0. Loveland starts at TE with Hockenson and Gunnar Helm behind him (TE need 0.0)."
       }
     ],
     "weaknesses": [
       {
         "label": "Aging RB room",
-        "detail": "Henry (32), Javonte (26), Hubbard (27), and Kamara (31) are all Declining. RB need is 0.4, the only real need on the roster."
+        "detail": "McCaffrey (30), Henry (32), Javonte (26), Hubbard (27), and Kamara (31) are all Declining. RB need is 0.4 with an aging score of 1.0, the only real need on the roster."
       },
       {
-        "label": "Hubbard is still running hot",
-        "detail": "Carolina is scoring 29.2 a game against a 22.6 Vegas average (+6.6). His numbers are likely to cool, so now is the time to swap him for a younger RB."
+        "label": "RB depth is thin",
+        "detail": "RJ Harvey is on IR, so one more RB injury puts Kamara or a taxi rookie in the lineup."
       },
       {
-        "label": "Thin RB depth",
-        "detail": "RJ Harvey (1,714) is in the lineup, and the Broncos are 2.9 a game under Vegas. One more RB injury and Kamara is starting."
+        "label": "Two starting RBs running hot",
+        "detail": "McCaffrey and Hubbard are on offenses scoring 3.7 a game over Vegas. Expect some cooling. Hold McCaffrey; Hubbard is the one to swap for a younger starter."
       }
     ],
-    "most_urgent_action": "Sell Tyler Shough while he's running hot (+3.3 vs Vegas) and sitting on your bench: Shough + Malik Washington for Jeremiyah Love (Undefeated In My Dreams, 1-13, weak at QB/RB). Values match exactly (5,226 for 5,226). Then swap Hubbard + 2027 2nd for Kyren Williams (You Hate Us, Long shot and selling; Rams 4.1 a game under Vegas). Keep Mahomes, Henry, Javonte, Nix, and the starting WRs.",
+    "most_urgent_action": "Sell Tyler Shough off your bench: Shough + Malik Washington for Jeremiyah Love (Undefeated In My Dreams, 1-15, Long shot, Dart on IR). That's 5,057 for 5,144. Add DeVonta Smith for Omarion Hampton in the same deal if they'll bite (7,849 for 8,145). Keep Mahomes, McCaffrey, Henry, Javonte, Nix, Loveland, and the starting WRs.",
     "positional_grades": {
       "QB": {
         "grade": "A",
-        "commentary": "Mahomes and Nix start, with Shough and Daniels on the bench. That's four QBs for two slots. Shough is the sell-high chip, Daniels is a package piece."
+        "commentary": "Mahomes and Nix start, with Shough and Daniels on the bench. Four QBs for two slots. Shough is the chip, Daniels is a package piece. Nix's Denver offense is 1.7 a game under Vegas, so there's room to bounce."
       },
       "RB": {
-        "grade": "B-",
-        "commentary": "Henry, Javonte, Hubbard, and Harvey all start, but every vet is Declining and Hubbard is inflated by a hot offense. This is the position to upgrade (need 0.4)."
+        "grade": "B",
+        "commentary": "McCaffrey, Javonte, Henry, and Hubbard all start, which is better than last week, but every one of them is Declining and Harvey is on IR. This is the position to upgrade (need 0.4)."
       },
       "WR": {
         "grade": "A-",
-        "commentary": "Watson and Higgins start, Parker Washington and DeVonta Smith are on the bench, Stribling is on IR. DeVonta Smith is the WR to move for an RB."
+        "commentary": "Parker Washington, Higgins, and Watson start, DeVonta Smith and Malik Washington sit, and Stribling is on IR. Watson's Green Bay offense is 3.1 a game under Vegas, so expect a bounce. Smith is the WR to move."
       },
       "TE": {
         "grade": "A",
-        "commentary": "Loveland is the long-term TE1 and Hockenson is starting in a flex. Need is just 0.04."
+        "commentary": "Loveland is the long-term TE1, with Hockenson and Gunnar Helm behind him. Need is 0.0, so Helm is a package piece."
       }
     }
   },
   "trade_strategy": {
     "trade_priority_order": [
-      "Shough + Malik Washington → Jeremiyah Love (Undefeated In My Dreams, 1-13, weak at QB/RB). Even on value, and Shough is your bench QB3.",
-      "Hubbard + 2027 2nd → Kyren Williams (You Hate Us, Long shot and selling). Sell high on Hubbard (+6.6), buy low on Kyren (-4.1).",
-      "DeVonta Smith → Omarion Hampton (Quarterback Factory, 3-11, weak at WR/RB). A bench WR for a young RB, bought low (Chargers -6.6).",
-      "Jalon Daniels + 2027 2nd + Josh Cameron + Tory Horton → Breece Hall (Bijan Mustard, 3-11)",
-      "All-in instead of Love: Shough + Javonte Williams + 2027 2nd + 2028 3rd → Bijan Robinson (Bijan Mustard)",
-      "Sell Kamara to Rolling Ball (8-6, weak at RB, buying) for a 2027 3rd",
-      "Hold Mahomes, Henry, Nix, Loveland, and the starting WRs. You're 11-3."
+      "Shough + Malik Washington → Jeremiyah Love (Undefeated In My Dreams, 1-15, Long shot, Dart on IR). 5,057 for 5,144.",
+      "DeVonta Smith → Omarion Hampton (same team; Chargers are 6.6 a game under Vegas, the biggest buy-low on the board). 2,792 for 3,001. Bundle with the Love deal if possible.",
+      "Hubbard + Gunnar Helm + Zavion Thomas → Kyren Williams (You Hate Us, Long shot and selling, weak at RB and TE). 4,031 for 4,067. Sells Hubbard at his hot-offense peak.",
+      "Jalon Daniels + 2027 2nd + Josh Cameron + Tory Horton → Breece Hall (Bijan Mustard, 4-12, weak at QB). 3,282 for 3,410.",
+      "Sell Kamara to Rolling Ball (10-6, weak at RB, buying) for a 2027 3rd, once one of the RBs above lands.",
+      "All-in alternative to the Love deal: Shough + Javonte Williams + 2027 2nd + 2028 3rd → Bijan Robinson (Bijan Mustard).",
+      "Hold Mahomes, McCaffrey, Henry, Nix, Loveland, and the starting WRs. You're 13-3."
     ],
     "sell_now": [
       {
         "player": "Tyler Shough",
         "urgency": "This week",
-        "reason": "Benched behind Mahomes and Nix, worth 3,930, and New Orleans is scoring 3.3 a game over Vegas. His value is at its peak and he isn't scoring for you.",
+        "reason": "QB3 on the bench behind Mahomes and Nix, worth 3,865. He isn't scoring for you, and Superflex rebuilders pay for a starting QB.",
         "ask": "Jeremiyah Love (with Malik Washington)"
-      },
-      {
-        "player": "Chuba Hubbard",
-        "urgency": "This week",
-        "reason": "A starter, but 27, Declining, and inflated by Carolina scoring +6.6 a game over Vegas. Swapping him for a younger starting RB is an upgrade, not a sell.",
-        "ask": "Kyren Williams (with a 2027 2nd)"
       },
       {
         "player": "DeVonta Smith",
         "urgency": "This week",
-        "reason": "On the bench behind Watson and Higgins, with Parker Washington also available. WR need is 0.0, so he's true surplus.",
+        "reason": "On the bench behind Parker Washington, Higgins, and Watson. WR need is 0.0, so he's true surplus.",
         "ask": "Omarion Hampton"
+      },
+      {
+        "player": "Chuba Hubbard",
+        "urgency": "This week",
+        "reason": "A starter, but 27, Declining, and inflated by Carolina scoring 3.7 a game over Vegas. Swapping him for a better starting RB is an upgrade, not a sell.",
+        "ask": "Kyren Williams (with Gunnar Helm and Zavion Thomas)"
       },
       {
         "player": "Jalon Daniels",
         "urgency": "This week",
-        "reason": "QB4 who will never start for you. Rebuilders like a rookie QB, so he works as a package piece.",
+        "reason": "QB4 who will never start for you. QB-needy rebuilders like a young QB, so he works as a package piece.",
         "ask": "Package piece for Breece Hall"
       },
       {
         "player": "Alvin Kamara",
-        "urgency": "This week",
-        "reason": "31-year-old bench RB whose value only drops from here.",
+        "urgency": "After an RB lands",
+        "reason": "31-year-old bench RB whose value only drops, but he's your top healthy RB backup while Harvey is on IR. Sell once a younger RB arrives.",
         "ask": "A 2027 3rd from RB-needy Rolling Ball"
       }
     ],
@@ -103,82 +103,86 @@
       {
         "player": "Jeremiyah Love",
         "from_team": "Undefeated In My Dreams",
-        "reason": "1-13 and weak at QB and RB. Shough gives them a starting QB and Malik Washington a WR, for one rookie RB. Even on value.",
+        "reason": "1-15 Long shot, flagged as selling, with Dart on IR. Shough gives them a starting QB now and Malik Washington helps their weak WR room.",
         "offer": "Tyler Shough + Malik Washington"
+      },
+      {
+        "player": "Omarion Hampton",
+        "from_team": "Undefeated In My Dreams",
+        "reason": "Same seller, weak at WR. The Chargers are 15.0 a game against a 21.6 Vegas average, so Hampton's price is depressed.",
+        "offer": "DeVonta Smith"
       },
       {
         "player": "Kyren Williams",
         "from_team": "You Hate Us Cuz You Anus",
-        "reason": "7-7 but a Long shot, flagged as selling, and weak at RB/WR/TE. The Rams are scoring 22.5 a game against a 26.6 Vegas average, so you're buying low.",
-        "offer": "Chuba Hubbard + 2027 2nd"
-      },
-      {
-        "player": "Omarion Hampton",
-        "from_team": "Quarterback Factory",
-        "reason": "3-11 and weak at WR. The Chargers are 6.6 a game under Vegas, the biggest buy-low on the board, and Hampton is on their bench.",
-        "offer": "DeVonta Smith"
+        "reason": "7-9 Long shot, flagged as selling, weak at RB/WR/TE. Hubbard backfills their RB and Helm their TE.",
+        "offer": "Chuba Hubbard + Gunnar Helm + Zavion Thomas"
       },
       {
         "player": "Breece Hall",
         "from_team": "Bijan Mustard",
-        "reason": "3-11, and Hall is on their bench. Dart is on IR, so a young QB helps them.",
+        "reason": "4-12, weak at QB, and Hall is on their bench. A young QB, a pick, and two young WRs.",
         "offer": "Jalon Daniels + 2027 2nd + Josh Cameron + Tory Horton"
       },
       {
         "player": "Bijan Robinson",
         "from_team": "Bijan Mustard",
-        "reason": "The all-in, as an alternative to the Love deal (it also uses Shough). Mahomes, Henry, Nix, and Harvey all stay.",
+        "reason": "The all-in, as an alternative to the Love deal (it also uses Shough, which fills their QB hole). Mahomes, McCaffrey, Henry, and Nix all stay.",
         "offer": "Tyler Shough + Javonte Williams + 2027 2nd + 2028 3rd"
       }
     ],
     "do_not_trade": [
       "Patrick Mahomes (standing rule)",
+      "Christian McCaffrey (starting RB on a 13-3 team)",
       "Colston Loveland (young TE1)",
-      "Derrick Henry (producing starter on an 11-3 team)",
+      "Derrick Henry (producing starter)",
       "Bo Nix (starting QB2)",
-      "Christian Watson / Tee Higgins (starting WRs)",
-      "Parker Washington (highest-value WR on the roster)"
+      "Parker Washington / Tee Higgins / Christian Watson (starting WRs)"
     ],
-    "pick_strategy": "You're 11-3, so picks are currency. Use the two 2027 2nds and 3rds/4ths to close gaps on RB deals. Hold the extra 2028 1st and your own 2027 1st unless they land Bijan or Love outright."
+    "pick_strategy": "You're 13-3, so picks are currency. Use the two 2027 2nds and the 3rds/4ths to close gaps on RB deals. Hold the extra 2028 1st unless it lands Bijan or Love outright."
   },
   "outlook": {
-    "projected_power_rank": "#1 composite title odds (#1 record, #1 PF, #5 value). You're the top seed if the lineup holds.",
-    "three_year_outlook": "Win now with the Mahomes/Loveland/WR core. Adding a young RB this season (Love, Kyren, Hampton, Hall, or Bijan) also covers 2027, when Henry and Javonte age out.",
-    "season_narrative": "The Jabroni Beaters are 11-3 in Week 7: best record, most points (1,001), and #1 in title odds. Shough is now a bench QB at peak value, and five Long shot teams hold the RBs you want. Shough, Hubbard, DeVonta Smith, and Daniels can buy a younger RB room without weakening the lineup.",
+    "projected_power_rank": "#1 composite title odds (#1 record, #1 PF, #4 value). You're the top seed if the lineup holds.",
+    "three_year_outlook": "Win now with the Mahomes/McCaffrey/Loveland/WR core. Adding a young RB this season (Love, Hampton, Hall, or Bijan) also covers 2027, when McCaffrey, Henry, and Kamara age out.",
+    "season_narrative": "The Jabroni Beaters are 13-3 in Week 8: best record, most points (1,157), and #1 in title odds, with McCaffrey now in the RB room. Shough is a bench QB holding real value, and five Long shot teams hold the RBs you want. Shough, DeVonta Smith, Daniels, and Hubbard can buy a younger RB room without weakening the lineup.",
     "key_risks": [
-      "Regression: Hubbard (+6.6) and Shough (+3.3) are on offenses scoring above their Vegas totals",
-      "An RB injury, since Harvey is already starting",
-      "Rolling Ball (8-6, weak at RB, buying) is competing with you for the same sellers' RBs"
+      "Regression: McCaffrey and Hubbard are on offenses scoring 3.7 a game over Vegas",
+      "An RB injury, with Harvey already on IR",
+      "Rolling Ball (10-6, weak at RB, buying) is competing with you for the same sellers' RBs"
     ],
     "key_upside_factors": [
-      "Landing Love, Kyren, Hampton, Hall, or Bijan turns RB into a strength",
-      "Watson (-2.1) and Harvey (-2.9) are on offenses under their Vegas totals, so expect a bounce",
-      "Stribling coming back from IR deepens WR, which makes DeVonta Smith easier to move"
+      "Landing Love, Hampton, Kyren, Hall, or Bijan turns RB into a strength",
+      "Watson (-3.1) and Nix (-1.7) are on offenses under their Vegas totals, so expect a bounce",
+      "Stribling and Harvey coming back from IR add depth for the playoff run"
     ],
     "teams_to_watch": [
       {
         "team": "Buck-ee's 🦫",
-        "why": "10-4 contender, one game back. Closest in the standings, so a rival rather than a trade partner."
+        "why": "12-4 contender, one game back. A rival rather than a trade partner."
+      },
+      {
+        "team": "Phil’s Dong Dusters",
+        "why": "12-4 but only Bubble on points (947) and built like a rebuilder. Tied for second, so not a partner for a star."
       },
       {
         "team": "dickcole2410",
-        "why": "8-6 but second in points (973). Dangerous in the playoffs."
+        "why": "9-7 but second in points (1,104). Dangerous in the playoffs."
       },
       {
         "team": "Undefeated In My Dreams",
-        "why": "1-13 and weak at QB/RB. Holds Jeremiyah Love, and Shough is the key to getting him."
+        "why": "1-15 seller with Dart on IR. Holds Jeremiyah Love and Omarion Hampton, and Shough is the key."
       },
       {
         "team": "You Hate Us Cuz You Anus",
-        "why": "7-7 but a Long shot and flagged as selling. Holds Kyren Williams at a buy-low price."
+        "why": "7-9 Long shot flagged as selling. Holds Kyren Williams and Quinshon Judkins."
       },
       {
         "team": "Bijan Mustard",
-        "why": "3-11. Holds Bijan and Breece Hall."
+        "why": "4-12 and weak at QB. Holds Bijan, Breece Hall, and Josh Jacobs (buy-low, Packers -3.1)."
       },
       {
         "team": "Rolling Ball of Knives 1X",
-        "why": "8-6, weak at RB and buying. Competes with you for RBs, but a buyer for Kamara."
+        "why": "10-6, weak at RB and buying. Competes with you for RBs, but a buyer for Kamara."
       }
     ]
   },
@@ -189,14 +193,20 @@
       "what_to_avoid": "Any offer. Don't take the call.",
       "alternative": "Hold and start him."
     },
+    "4034": {
+      "sell_reasoning": "Hold for the title run. McCaffrey is 30 and San Francisco is running 3.7 a game over Vegas, but he's a producing starter on a 13-3 team.",
+      "top_targets": [],
+      "what_to_avoid": "Selling him for picks or youth in the middle of a title run.",
+      "alternative": "Keep starting him. Revisit in the offseason."
+    },
     "12545": {
-      "sell_reasoning": "Your top chip. He's on the bench behind Mahomes and Nix, worth 3,930, and New Orleans is scoring 3.3 a game over Vegas, so sell high.",
+      "sell_reasoning": "Your top chip. QB3 on the bench behind Mahomes and Nix, worth 3,865. Superflex rebuilders with QB holes pay for him.",
       "top_targets": [
         {
           "rank": 1,
           "target_owner": "Undefeated In My Dreams",
           "their_player": "Jeremiyah Love",
-          "why_they_trade": "1-13 and weak at QB and RB. They get a starting QB and a WR for one rookie RB, at even value.",
+          "why_they_trade": "1-15 seller with Dart on IR. They get a starting QB and a WR for one rookie RB, at near-even value.",
           "i_give": ["Tyler Shough", "Malik Washington"],
           "i_receive": ["Jeremiyah Love"],
           "verdict": "Do it",
@@ -204,9 +214,19 @@
         },
         {
           "rank": 2,
+          "target_owner": "Undefeated In My Dreams",
+          "their_player": "Jeremiyah Love + Omarion Hampton",
+          "why_they_trade": "The bundle: a QB plus two WRs for both of their young RBs. Fixes your RB room in one move.",
+          "i_give": ["Tyler Shough", "Malik Washington", "DeVonta Smith"],
+          "i_receive": ["Jeremiyah Love", "Omarion Hampton"],
+          "verdict": "Ask",
+          "confidence": "Medium"
+        },
+        {
+          "rank": 3,
           "target_owner": "Bijan Mustard",
           "their_player": "Bijan Robinson",
-          "why_they_trade": "3-11 and a Long shot. The all-in: your spare QB, a declining starter, and two picks for an elite RB.",
+          "why_they_trade": "4-12 and weak at QB. The all-in: your spare QB, a declining starter, and two picks for an elite RB.",
           "i_give": ["Tyler Shough", "Javonte Williams", "2027 2nd", "2028 3rd"],
           "i_receive": ["Bijan Robinson"],
           "verdict": "Ask",
@@ -224,7 +244,7 @@
           "target_owner": "Undefeated In My Dreams",
           "their_player": "Jeremiyah Love",
           "why_they_trade": "Fallback if you keep Shough. Same idea: a QB plus young WRs for their rookie RB.",
-          "i_give": ["Bo Nix", "Malik Washington", "Zavion Thomas"],
+          "i_give": ["Bo Nix", "Malik Washington", "Josh Cameron"],
           "i_receive": ["Jeremiyah Love"],
           "verdict": "Ask, only if Shough stays",
           "confidence": "Medium"
@@ -234,16 +254,26 @@
       "alternative": "Hold as the starting QB2."
     },
     "13425": {
-      "sell_reasoning": "QB4 who won't start for you. Rebuilders value a rookie QB, so he's an ideal package piece in an RB deal.",
+      "sell_reasoning": "QB4 who won't start for you. QB-needy rebuilders value a young QB, so he's an ideal package piece in an RB deal.",
       "top_targets": [
         {
           "rank": 1,
           "target_owner": "Bijan Mustard",
           "their_player": "Breece Hall",
-          "why_they_trade": "3-11 rebuilder with Dart on IR. A young QB, a pick, and two young WRs for their bench RB.",
+          "why_they_trade": "4-12 and weak at QB. A young QB, a pick, and two young WRs for their bench RB.",
           "i_give": ["Jalon Daniels", "2027 2nd", "Josh Cameron", "Tory Horton"],
           "i_receive": ["Breece Hall"],
           "verdict": "Do it",
+          "confidence": "Medium"
+        },
+        {
+          "rank": 2,
+          "target_owner": "Bijan Mustard",
+          "their_player": "Josh Jacobs",
+          "why_they_trade": "Same seller. Jacobs is a starting RB and a buy-low (Packers 3.1 a game under Vegas) if you want production now over youth.",
+          "i_give": ["Jalon Daniels", "2027 2nd", "Josh Cameron"],
+          "i_receive": ["Josh Jacobs"],
+          "verdict": "Ask",
           "confidence": "Medium"
         }
       ],
@@ -251,7 +281,7 @@
       "alternative": "Hold as the QB4 lottery ticket."
     },
     "3198": {
-      "sell_reasoning": "Hold for the title run. Henry is 32, but he's a producing starter on an 11-3 team.",
+      "sell_reasoning": "Hold for the title run. Henry is 32, but he's a producing starter on a 13-3 team.",
       "top_targets": [],
       "what_to_avoid": "Lowball offers from rebuilders, or any deal that weakens your RB room this season.",
       "alternative": "Keep starting him."
@@ -274,54 +304,58 @@
       "alternative": "Keep starting him."
     },
     "7594": {
-      "sell_reasoning": "A starter, but Declining and running hot (Carolina +6.6 a game over Vegas). Swap him for a younger RB at the same spot while his numbers look great.",
+      "sell_reasoning": "A starter, but Declining and running hot (Carolina +3.7 a game over Vegas). Swap him for a better RB at the same spot while his numbers look great.",
       "top_targets": [
         {
           "rank": 1,
           "target_owner": "You Hate Us Cuz You Anus",
           "their_player": "Kyren Williams",
-          "why_they_trade": "Long shot and selling, so they'll take a pick. Hubbard backfills their RB, and Kyren is a buy-low (Rams -4.1 a game vs Vegas).",
-          "i_give": ["Chuba Hubbard", "2027 2nd"],
+          "why_they_trade": "Long shot and selling, weak at RB and TE. Hubbard backfills their RB and Helm their TE.",
+          "i_give": ["Chuba Hubbard", "Gunnar Helm", "Zavion Thomas"],
           "i_receive": ["Kyren Williams"],
           "verdict": "Do it",
+          "confidence": "Medium"
+        },
+        {
+          "rank": 2,
+          "target_owner": "You Hate Us Cuz You Anus",
+          "their_player": "Quinshon Judkins",
+          "why_they_trade": "Straight swap for a 23-year-old starting RB. They get the proven vet, you get younger at the same slot.",
+          "i_give": ["Chuba Hubbard"],
+          "i_receive": ["Quinshon Judkins"],
+          "verdict": "Ask",
           "confidence": "Medium"
         }
       ],
       "what_to_avoid": "Selling him for future assets. Move him only for an RB who starts.",
       "alternative": "Keep starting him."
     },
-    "12489": {
-      "sell_reasoning": "In the lineup and your only young RB depth. Hold. He becomes a bench body once Love or Kyren arrives.",
-      "top_targets": [],
-      "what_to_avoid": "Selling him alone. You need the RB bodies.",
-      "alternative": "Keep starting him until an upgrade lands."
-    },
     "9487": {
-      "sell_reasoning": "The highest-value WR on the roster (4,105). He's on the bench this week, but he's a core piece for the title run. Hold.",
+      "sell_reasoning": "Starting WR and the highest-value WR on the roster (3,983). Core piece for the title run. Hold.",
       "top_targets": [],
       "what_to_avoid": "Selling your best WR to fix RB. DeVonta Smith is the WR to move.",
-      "alternative": "Hold, and check he's back in the lineup once available."
+      "alternative": "Hold."
     },
     "8167": {
-      "sell_reasoning": "Starting WR. Hold for the title run. Green Bay is running 2.1 a game below Vegas, so his production should hold up or improve.",
+      "sell_reasoning": "Starting WR. Hold for the title run. Green Bay is running 3.1 a game below Vegas, so his production should hold up or improve.",
       "top_targets": [],
-      "what_to_avoid": "Selling a starter in the middle of a title run.",
+      "what_to_avoid": "Selling a starter at a buy-low moment.",
       "alternative": "Hold."
     },
     "6801": {
-      "sell_reasoning": "Starting WR this week. Hold for the title run.",
+      "sell_reasoning": "Starting WR. Hold for the title run.",
       "top_targets": [],
-      "what_to_avoid": "Selling a producing starter on an 11-3 team.",
+      "what_to_avoid": "Selling a producing starter on a 13-3 team.",
       "alternative": "Hold."
     },
     "7525": {
-      "sell_reasoning": "On the bench behind Watson and Higgins, with Parker Washington also available and WR need at 0.0. Your best chip for a young RB from a WR-needy seller.",
+      "sell_reasoning": "On the bench behind Parker Washington, Higgins, and Watson, with WR need at 0.0. Your best chip for a young RB from a WR-needy seller.",
       "top_targets": [
         {
           "rank": 1,
-          "target_owner": "Quarterback Factory",
+          "target_owner": "Undefeated In My Dreams",
           "their_player": "Omarion Hampton",
-          "why_they_trade": "3-11 Long shot, weak at WR and RB, and Hampton is on their bench. They get a proven WR, and you buy Hampton low (Chargers -6.6 a game vs Vegas).",
+          "why_they_trade": "1-15 Long shot, weak at WR. They get a proven WR, and you buy Hampton low (Chargers 6.6 a game under Vegas).",
           "i_give": ["DeVonta Smith"],
           "i_receive": ["Omarion Hampton"],
           "verdict": "Do it",
@@ -338,10 +372,27 @@
       "alternative": "Hold."
     },
     "5844": {
-      "sell_reasoning": "Starting in a flex behind Loveland, with TE need at 0.04. Worth keeping for the title run.",
+      "sell_reasoning": "TE2 on the bench behind Loveland, with TE need at 0.0. Worth keeping as Loveland's backup for the title run.",
       "top_targets": [],
-      "what_to_avoid": "Dumping him for a late pick. That leaves TE without a backup.",
-      "alternative": "Hold. If a TE-needy seller (You Hate Us, Phil's) wants him as a sweetener in an RB deal, that's fine."
+      "what_to_avoid": "Dumping him for a late pick. Gunnar Helm is the TE to move first.",
+      "alternative": "Hold. If a TE-needy seller wants him as a sweetener in an RB deal, that's fine."
+    },
+    "12502": {
+      "sell_reasoning": "TE3 behind Loveland and Hockenson. TE need is 0.0, so he's a package piece for a TE-needy seller.",
+      "top_targets": [
+        {
+          "rank": 1,
+          "target_owner": "You Hate Us Cuz You Anus",
+          "their_player": "Kyren Williams",
+          "why_they_trade": "Fills their weak TE spot and evens out the Hubbard deal",
+          "i_give": ["Chuba Hubbard", "Gunnar Helm", "Zavion Thomas"],
+          "i_receive": ["Kyren Williams"],
+          "verdict": "Package use",
+          "confidence": "Medium"
+        }
+      ],
+      "what_to_avoid": "Cutting him. A 24-year-old TE closes trade gaps.",
+      "alternative": "Hold as TE3."
     },
     "11610": {
       "sell_reasoning": "Bench WR and a useful sweetener.",
@@ -350,7 +401,7 @@
           "rank": 1,
           "target_owner": "Undefeated In My Dreams",
           "their_player": "Jeremiyah Love",
-          "why_they_trade": "Evens out the Shough deal and adds a WR",
+          "why_they_trade": "Evens out the Shough deal and adds a WR to their weak room",
           "i_give": ["Tyler Shough", "Malik Washington"],
           "i_receive": ["Jeremiyah Love"],
           "verdict": "Package use",
@@ -361,21 +412,21 @@
       "alternative": "Hold as depth."
     },
     "4035": {
-      "sell_reasoning": "31, Declining, and on your bench. Sell to an RB-needy buyer for whatever you can get.",
+      "sell_reasoning": "31, Declining, and on your bench, but he's the top healthy RB backup while Harvey is on IR. Sell once a younger RB lands.",
       "top_targets": [
         {
           "rank": 1,
           "target_owner": "Rolling Ball of Knives 1X",
           "their_player": "2027 3rd",
-          "why_they_trade": "8-6, weak at RB, and buying",
+          "why_they_trade": "10-6, weak at RB, and buying",
           "i_give": ["Alvin Kamara"],
           "i_receive": ["2027 3rd"],
-          "verdict": "Ask",
+          "verdict": "Ask, after an RB lands",
           "confidence": "Medium"
         }
       ],
-      "what_to_avoid": "Waiting. His value only drops.",
-      "alternative": "Take a 2027 4th if they won't go to a 3rd, or keep him for bye weeks."
+      "what_to_avoid": "Selling him before you add an RB. You'd be one injury from starting a taxi rookie.",
+      "alternative": "Take a 2028 3rd if they won't go to a 2027 3rd, or keep him for bye weeks."
     },
     "13413": {
       "sell_reasoning": "23-year-old rookie WR on the taxi squad. Hold for the upside.",

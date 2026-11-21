@@ -91,7 +91,7 @@ def _bsc(window: str) -> tuple[str, str]:
 # ---------------------------------------------------------------------------
 def render_dashboard(data, metrics, my_enriched, opponent_profiles, sell_candidates, buys,
                      pick_portfolio, pick_total, war_room, fa_analysis, ai, rankings,
-                     contention=None, fa_summary="", vegas=None, vegas_sig=None) -> str:
+                     contention=None, fa_summary="", vegas=None, vegas_sig=None, playoffs=None) -> str:
     # Draft state comes from Sleeper, not a hardcoded date.
     draft = data.draft
     draft_done = draft.get("status") == "complete"
@@ -137,7 +137,7 @@ def render_dashboard(data, metrics, my_enriched, opponent_profiles, sell_candida
     parts.append("</header>")
 
     # Nav — War Room only exists in the run-up to a draft
-    tabs = ["Overview", "Roster", "Trade Finder"] + ([] if draft_done else ["War Room"]) + ["Free Agents", "Standings"]
+    tabs = ["Overview", "Roster", "Trade Finder"] + ([] if draft_done else ["War Room"]) + ["Free Agents", "Standings"] + (["Playoffs"] if playoffs else [])
     parts.append("<nav>")
     for i, t in enumerate(tabs):
         parts.append(f"<button class='{'active' if i == 0 else ''}' onclick=\"showTab({i})\">{t}</button>")
@@ -150,6 +150,9 @@ def render_dashboard(data, metrics, my_enriched, opponent_profiles, sell_candida
         parts.append(_tab_warroom(ai, war_room, pick_portfolio, pick_total, days_to_draft, draft_soon))
     parts.append(_tab_fa(fa_analysis, fa_summary))
     parts.append(_tab_standings(ai, opponent_profiles, metrics, r, has_results, week, contention, data.user_id))
+
+    if playoffs:
+        parts.append(_tab_playoffs(playoffs))
 
     tf_json = json.dumps(ai.get("trade_finder", {}))
     parts.append("<script>")
@@ -484,6 +487,107 @@ def _tab_fa(fa_analysis, fa_summary) -> str:
         p.append("</div>")
     if not fa_analysis:
         p.append('<div class="card"><p class="muted">No free agents would improve your roster right now.</p></div>')
+    return "".join(p) + "</div>"
+
+
+_GRADE_CLS = {"Favorable": "b-grn", "Tough": "b-red", "Neutral": "b-mut", "Bye": "b-gold"}
+
+
+def _mchip(g: dict) -> str:
+    if not g:
+        return '<span class="muted">—</span>'
+    if g["grade"] == "Bye":
+        return '<span class="badge b-gold">BYE</span>'
+    where = "vs" if g["home"] else "@"
+    return (f'<span class="badge {_GRADE_CLS[g["grade"]]}" title="{_esc(g["basis"])}">'
+            f'{where} {g["opp"]} · {g["grade"]}</span>')
+
+
+def _tab_playoffs(pl) -> str:
+    wk, dl = pl["week"], pl["deadline"]
+    p = ['<div class="tab" id="t6">']
+    dl_txt = ("" if dl is None else
+              f" · <b class='warn'>Trade deadline Week {dl} ({dl - wk} week(s) left)</b>" if wk <= dl else
+              f" · trade deadline passed (Week {dl})")
+    p.append(f'<div class="card sec"><h3>Your path to the title</h3>'
+             f'<p class="muted" style="margin-bottom:10px">Playoffs start Week {pl["start"]} · projected bracket, '
+             f'updates every build until the regular season ends{dl_txt}</p>')
+    for b in pl["bracket"]["path"]:
+        label = {1: "Round 1", 2: "Semifinal", 3: "Championship"}.get(b["round"], f"Round {b['round']}")
+        if b["bye"]:
+            body = '<span class="badge b-gold">BYE</span> <span class="muted">top-2 seed skips this week</span>'
+        else:
+            body = "possible opponents: " + " · ".join(f"<b>{_esc(o['team'])}</b>" for o in b["opponents"])
+        p.append(f'<div style="margin-bottom:8px"><b>Week {b["week"]}</b> <span class="muted">{label}</span> — {body}</div>')
+    p.append("</div>")
+
+    # Seeding race
+    p.append('<div class="card sec"><h3>Seeding race</h3><table><tr><th>Seed</th><th>Team</th><th>Record</th>'
+             '<th>PF</th><th>Left (head-to-head)</th><th></th></tr>')
+    for r in pl["seeding"][:8]:
+        tag = ('<span class="badge b-gold">BYE</span>' if r["bye"] else
+               '<span class="badge b-grn">IN</span>' if r["in"] else '<span class="badge b-mut">OUT</span>')
+        p.append(f'<tr class="{"me" if r["me"] else ""}"><td>{r["seed"]}</td>'
+                 f'<td>{"<b>You</b>" if r["me"] else _esc(r["team"])}</td><td>{r["wins"]}-{r["losses"]}</td>'
+                 f'<td>{r["pf"]:.0f}</td><td class="muted" style="font-size:12px">{_esc(", ".join(r["remaining"]))}</td>'
+                 f'<td>{tag}</td></tr>')
+    p.append("</table>")
+    seeds = pl["seeding"]
+    me = next((r for r in seeds if r["me"]), None)
+    if me and len(seeds) > 2:
+        third = seeds[2] if me["seed"] <= 2 else seeds[1]
+        lead = me["wins"] - third["wins"] if me["seed"] <= 2 else third["wins"] - me["wins"]
+        p.append(f'<p class="muted" style="margin-top:8px;font-size:12px">'
+                 f'{"Bye line: you lead #3 by" if me["seed"] <= 2 else "You trail the bye line by"} {abs(lead)} win(s). '
+                 f'Every team has a median-score game each week, so two results per week count.</p>')
+    p.append("</div>")
+
+    # Lineups
+    src = ("Vegas lines are posted for these weeks." if pl["lines_posted"] else
+           "Vegas hasn't posted these weeks yet; matchups are graded on the opponent's points allowed per game "
+           "(softest 8 defenses = favorable) and switch to Vegas totals as lines post (mid-week).")
+    p.append(f'<div class="card sec"><h3>Playoff lineups</h3><p class="muted" style="margin-bottom:10px;font-size:12px">'
+             f'Ranked by FantasyCalc value nudged ±8% for matchup; injured/bye players excluded. {_esc(src)}</p>')
+    shown = [w for w in pl["weeks"] if pl["lineups"][w]["plays"]]
+    p.append('<div class="grid g2">')
+    for w in shown:
+        p.append(f'<div><div style="font-weight:700;margin-bottom:6px">Week {w}</div><table>')
+        for x in pl["lineups"][w]["lineup"]:
+            q = x["player"]
+            p.append(f'<tr><td class="muted" style="width:56px">{x["slot"]}</td><td>{_esc(q.name)}</td>'
+                     f'<td>{_mchip(x["grade"])}</td></tr>')
+        p.append("</table></div>")
+    p.append("</div></div>")
+
+    # Matchup grid
+    p.append('<div class="card sec"><h3>Matchups by week</h3><table><tr><th>Player</th>'
+             + "".join(f"<th>Wk {w}</th>" for w in pl["weeks"]) + "</tr>")
+    for row in pl["table"]:
+        q = row["p"]
+        p.append(f'<tr><td>{_esc(q.name)} <span class="muted">{q.position} · {q.team}</span></td>'
+                 + "".join(f"<td>{_mchip(g)}</td>" for g in row["weeks"]) + "</tr>")
+    p.append("</table></div>")
+
+    # Scouting
+    if pl["scouts"]:
+        p.append('<div class="card sec"><h3>Scouting — who you could face</h3><div class="grid g2">')
+        for sc in pl["scouts"].values():
+            p.append(f'<div><b>{_esc(sc["team"])}</b> <span class="badge {_status_cls(sc["status"])}">{sc["status"]}</span>'
+                     f'<div class="muted" style="font-size:12px">{sc["record"]} · {sc["pf"]:.0f} PF · value {sc["value"]:,}'
+                     f'<br>Strong: {_esc(", ".join(sc["strong"]) or "—")} · Weak: {_esc(", ".join(sc["weak"]) or "—")}'
+                     f'<br>{_esc(" · ".join(sc["top"]))}</div></div>')
+        p.append("</div></div>")
+
+    # Deadline buys
+    if pl["buys"]:
+        p.append('<div class="card sec"><h3>Deadline buys — good playoff matchups at your need</h3>'
+                 '<p class="muted" style="font-size:12px;margin-bottom:8px">Players at your need positions whose NFL '
+                 'schedule grades well in your playoff weeks. Sellers listed first.</p>')
+        for b in pl["buys"]:
+            p.append(f'<div style="margin-bottom:8px"><b>{_esc(b["name"])}</b> '
+                     f'<span class="muted">{b["pos"]} · {b["team"]} · {b["value"]:,} · from {_esc(b["from"])} '
+                     f'({b["status"]})</span><div>{" ".join(_mchip(g) for g in b["grades"])}</div></div>')
+        p.append("</div>")
     return "".join(p) + "</div>"
 
 

@@ -95,7 +95,7 @@ def fetch_vegas(season: str, week: int) -> dict:
 
     def team(a):
         return teams.setdefault(a, {"implied": None, "opp": None, "home": None,
-                                    "games": 0, "actual": 0, "expected": 0.0})
+                                    "games": 0, "actual": 0, "expected": 0.0, "allowed": 0})
 
     for games in past.values():
         for g in games:
@@ -104,6 +104,7 @@ def fetch_vegas(season: str, week: int) -> dict:
                 t["games"] += 1
                 t["actual"] += g[f"{side}_score"]
                 t["expected"] += g[f"{side}_implied"]
+                t["allowed"] += g["away_score" if side == "home" else "home_score"]
     for g in cur["games"]:
         for side, other in (("home", "away"), ("away", "home")):
             t = team(g[side])
@@ -111,7 +112,36 @@ def fetch_vegas(season: str, week: int) -> dict:
     for t in teams.values():
         n = t["games"] or 1
         t["avg_implied"] = round(t["expected"] / n, 1)
+        t["avg_allowed"] = round(t["allowed"] / n, 1)
         t["luck"] = round((t["actual"] - t["expected"]) / n, 1)   # + = beating Vegas
     log.info("Vegas: %d teams with week %d lines, %d past weeks of closing lines",
              sum(1 for t in teams.values() if t["implied"] is not None), week, len(past))
     return {"week": week, "teams": teams} if teams else {}
+
+
+def fetch_future(season: str, weeks: list[int]) -> dict[int, dict]:
+    """NFL schedule (+ Vegas implied totals once the book posts them) for later weeks.
+    Returns {week: {team: {"opp", "home", "implied" (None until lines post)}}}."""
+    cache = json.loads(CACHE.read_text()) if CACHE.exists() else {"season": season, "past": {}}
+    fut = cache.get("future") or {}
+    out: dict[int, dict] = {}
+    for w in weeks:
+        c = fut.get(str(w)) or {}
+        if not c or time.time() - c.get("fetched_at", 0) > CURRENT_TTL:
+            sb = _get(f"{BASE}/scoreboard?dates={season}&seasontype=2&week={w}")
+            teams: dict[str, dict] = {}
+            for e in sb.get("events", []):
+                comp = e["competitions"][0]
+                sides = {x["homeAway"]: x for x in comp["competitors"]}
+                imp = _implied((comp.get("odds") or [{}])[0])
+                for side, other in (("home", "away"), ("away", "home")):
+                    teams[_abbr(sides[side])] = {
+                        "opp": _abbr(sides[other]), "home": side == "home",
+                        "implied": round(imp[0 if side == "home" else 1], 1) if imp else None}
+            c = {"fetched_at": time.time(), "teams": teams}
+            if teams:
+                fut[str(w)] = c
+        out[w] = c.get("teams", {})
+    cache["future"] = fut
+    CACHE.write_text(json.dumps(cache))
+    return out

@@ -21,12 +21,13 @@ from analysts.opponents import assess_contention, classify_opponents
 from analysts.picks import build_pick_portfolio, build_war_room, slot_for_round
 from analysts.roster import enrich_all_rosters, enrich_roster, positional_needs
 from analysts.trades import reprice_packages, run_trade_discovery
+from analysts.playoffs import build_playoffs
 from analysts.vegas import vegas_signals
 from analysts.waivers import scan_free_agents, waiver_summary
 from fetchers.fantasycalc import fetch_fc_values, load_fc_pick_values, load_fc_values
 from fetchers.rankings import fetch_ktc_rankings, load_rankings_cache
 from fetchers.sleeper import fetch_all_sleeper_data, fetch_draft_picks
-from fetchers.vegas import fetch_vegas
+from fetchers.vegas import fetch_future, fetch_vegas
 
 SLEEPER_USERNAME = "thejabronibeatr"
 SLEEPER_LEAGUE_ID = "1312154605395652608"
@@ -176,6 +177,13 @@ def main() -> None:
     log.info("Vegas signals: %d sell-high, %d buy-low",
              len(vegas_sig["sell_high"]), len(vegas_sig["buy_low"]))
 
+    playoffs = None
+    if data.league.get("status") == "in_season":
+        start = (data.league.get("settings") or {}).get("playoff_week_start") or 15
+        future = fetch_future(str(data.league.get("season")), [start, start + 1, start + 2])
+        playoffs = build_playoffs(data, SLEEPER_LEAGUE_ID, my_enriched, opponent_profiles,
+                                  opponent_enriched, contention, needs, vegas, future)
+
     log.info("Analyzing picks%s...", "" if draft_done else " + War Room")
     my_slot = _my_ktc_slot(data, rank_by_id, fc_values)
     pick_portfolio, pick_total = build_pick_portfolio(data, my_slot, fc_picks)
@@ -213,7 +221,7 @@ def main() -> None:
     out = render_dashboard(data, metrics, my_enriched, opponent_profiles, sell_candidates, buys,
                            pick_portfolio, pick_total, war_room, fa_analysis, ai, rankings,
                            contention=contention, fa_summary=fa_summary,
-                           vegas=vegas, vegas_sig=vegas_sig)
+                           vegas=vegas, vegas_sig=vegas_sig, playoffs=playoffs)
     log.info("Done -> %s", out)
 
 

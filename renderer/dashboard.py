@@ -544,10 +544,10 @@ def _tab_playoffs(pl) -> str:
 
     # Lineups
     src = ("Vegas lines are posted for these weeks." if pl["lines_posted"] else
-           "Vegas hasn't posted these weeks yet; matchups are graded on the opponent's points allowed per game "
-           "(softest 8 defenses = favorable) and switch to Vegas totals as lines post (mid-week).")
+           "Vegas hasn't posted these weeks yet; grades use the position-specific defense alone and add "
+           "Vegas totals as lines post (mid-week).")
     p.append(f'<div class="card sec"><h3>Playoff lineups</h3><p class="muted" style="margin-bottom:10px;font-size:12px">'
-             f'Ranked by FantasyCalc value nudged ±8% for matchup; injured/bye players excluded. {_esc(src)}</p>')
+             f'Grades = fantasy points the opposing defense allows to the player position (hover a chip for the numbers). Ranked by FantasyCalc value nudged ±8% for matchup; injured/bye players excluded. {_esc(src)}</p>')
     shown = [w for w in pl["weeks"] if pl["lineups"][w]["plays"]]
     p.append('<div class="grid g2">')
     for w in shown:

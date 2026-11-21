@@ -1,10 +1,10 @@
 """Playoff planner: bracket path, seeding race, matchup-graded lineups, deadline buys.
 
 Matchup grade for a player's NFL team in a given week:
-  - Vegas implied team points once the book posts them (>=24 favorable, <=19.5 tough);
-  - until then, the opponent's points allowed per game this season (softest 8 of
-    32 defenses favorable, toughest 8 tough). Team-level only: positional
-    defense (vs RB / vs WR) isn't available from a free source.
+  - the opponent's half-PPR fantasy points allowed to THAT position this season
+    (computed from box scores; softest 8 of 32 = +1, toughest 8 = -1), plus
+  - Vegas implied team points once posted (>=25 = +1, <=19.5 = -1).
+  Net >=+1 favorable, <=-1 tough.
 Lineups rank by market value nudged by matchup, because weekly projections
 aren't published this far out.
 """
@@ -25,26 +25,32 @@ SCORE = {"Favorable": 1, "Neutral": 0, "Tough": -1}
 NUDGE = 0.08
 
 
-def grade(team: str, week_sched: dict, vegas_teams: dict, allowed_rank: dict) -> dict:
+def grade(team: str, pos: str, week_sched: dict, vegas_teams: dict, pos_rank: dict) -> dict:
     g = (week_sched or {}).get(team)
     if not g:
         return {"grade": "Bye", "opp": None, "home": None, "implied": None, "basis": "bye week"}
+    score, basis = 0, []
+    rk = pos_rank.get(pos, {}).get(g["opp"])
+    if rk is not None:
+        score += 1 if rk <= 8 else -1 if rk > 24 else 0
+        pa = vegas_teams[g["opp"]]["pos_allowed"][pos]
+        basis.append(f"{g['opp']} allow {pa:g} {pos} pts/g (#{rk} softest)")
     if g["implied"] is not None:
-        gr = "Favorable" if g["implied"] >= 24 else "Tough" if g["implied"] <= 19.5 else "Neutral"
-        basis = f"Vegas {g['implied']:g} pts"
-    else:
-        rk = allowed_rank.get(g["opp"])
-        gr = "Neutral" if rk is None else "Favorable" if rk <= 8 else "Tough" if rk > 24 else "Neutral"
-        pa = (vegas_teams.get(g["opp"]) or {}).get("avg_allowed")
-        basis = f"{g['opp']} allow {pa:g}/g" if pa is not None else "no data"
-    return {"grade": gr, "opp": g["opp"], "home": g["home"], "implied": g["implied"], "basis": basis}
+        score += 1 if g["implied"] >= 25 else -1 if g["implied"] <= 19.5 else 0
+        basis.append(f"Vegas {g['implied']:g} team pts")
+    gr = "Favorable" if score >= 1 else "Tough" if score <= -1 else "Neutral"
+    return {"grade": gr, "opp": g["opp"], "home": g["home"], "implied": g["implied"],
+            "basis": " · ".join(basis) or "no data"}
 
 
-def _allowed_rank(vegas_teams: dict) -> dict:
-    """1 = gives up the most points (softest defense)."""
-    ranked = sorted((a for a, t in vegas_teams.items() if t.get("avg_allowed") is not None),
-                    key=lambda a: -vegas_teams[a]["avg_allowed"])
-    return {a: i + 1 for i, a in enumerate(ranked)}
+def _pos_rank(vegas_teams: dict) -> dict:
+    """pos -> {team: rank}, 1 = allows the most fantasy points to that position."""
+    out = {}
+    for pos in ("QB", "RB", "WR", "TE"):
+        ranked = sorted((a for a, t in vegas_teams.items() if pos in t.get("pos_allowed", {})),
+                        key=lambda a: -vegas_teams[a]["pos_allowed"][pos])
+        out[pos] = {a: i + 1 for i, a in enumerate(ranked)}
+    return out
 
 
 def _possible(matches: dict, ref) -> set:
@@ -127,7 +133,7 @@ def best_lineup(players, week_grades: dict) -> list[dict]:
     return lineup
 
 
-def deadline_buys(opponent_profiles, opponent_enriched, contention, needs, fut_grades, weeks) -> list[dict]:
+def deadline_buys(opponent_profiles, opponent_enriched, contention, needs, G, weeks) -> list[dict]:
     need_pos = {pos for pos, n in (needs or {}).items() if n["need"] >= 0.3}
     order = {"Long shot": 0, "Bubble": 1, "Contender": 2}
     out = []
@@ -136,8 +142,8 @@ def deadline_buys(opponent_profiles, opponent_enriched, contention, needs, fut_g
         for p in opponent_enriched.get(o.owner_id, []):
             if p.position not in need_pos or p.market_value < BUY_MIN_VALUE or p.name in NEVER_TRADE:
                 continue
-            gs = [fut_grades[w].get(p.team) for w in weeks]
-            sc = sum(SCORE.get(g["grade"], -1) if g else 0 for g in gs)
+            gs = [G(w, p) for w in weeks]
+            sc = sum(SCORE.get(g["grade"], -1) for g in gs)
             if sc < 1:
                 continue
             out.append({"name": p.name, "pos": p.position, "team": p.team, "value": p.market_value,
@@ -153,20 +159,19 @@ def build_playoffs(data, league_id, my_enriched, opponent_profiles, opponent_enr
     start = s.get("playoff_week_start") or 15
     deadline = s.get("trade_deadline")
     vt = (vegas or {}).get("teams", {})
-    arank = _allowed_rank(vt)
+    prank = _pos_rank(vt)
     weeks = sorted(future)
-    team_grades = {w: {t: grade(t, future[w], vt, arank) for t in {x.team for x in my_enriched + [
-        q for pl in opponent_enriched.values() for q in pl] if x.team != "FA"}} for w in weeks}
+    G = lambda w, p: grade(p.team, p.position, future[w], vt, prank)   # noqa: E731
     bracket = build_bracket(data, league_id)
     play_weeks = [b["week"] for b in bracket["path"] if not b["bye"]] or weeks
     lineups = {}
     for w in weeks:
-        wg = {p.player_id: team_grades[w].get(p.team, {"grade": "Neutral"}) for p in my_enriched}
+        wg = {p.player_id: G(w, p) for p in my_enriched}
         lineups[w] = {"lineup": best_lineup(my_enriched, wg), "plays": w in play_weeks}
     table = []
     for p in sorted(my_enriched, key=lambda z: -z.market_value):
         if p.slot_type in ("starter", "bench") and p.market_value >= 800:
-            table.append({"p": p, "weeks": [team_grades[w].get(p.team, {"grade": "Neutral"}) for w in weeks]})
+            table.append({"p": p, "weeks": [G(w, p) for w in weeks]})
     by_roster = {o.roster_id: o for o in opponent_profiles}
     scouts = {}
     for b in bracket["path"]:
@@ -181,7 +186,7 @@ def build_playoffs(data, league_id, my_enriched, opponent_profiles, opponent_enr
                                           "top": [f"{t.name} ({t.position})" for t in top]}
     buys = []
     if deadline is None or week <= deadline:
-        buys = deadline_buys(opponent_profiles, opponent_enriched, contention, needs, team_grades,
+        buys = deadline_buys(opponent_profiles, opponent_enriched, contention, needs, G,
                              [w for w in weeks if w in play_weeks] or weeks)
     log.info("Playoffs: bracket %s, lineups for weeks %s, %d deadline buys",
              "ok" if bracket["ok"] else "unavailable", weeks, len(buys))
